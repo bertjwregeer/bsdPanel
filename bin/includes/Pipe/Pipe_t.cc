@@ -30,6 +30,7 @@ int main() {
                         mypipe.read(data);
                         
                         std::cerr << "data contains: " << data << std::endl;
+                        
                         break;
                         }
                 default:
