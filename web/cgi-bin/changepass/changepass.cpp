@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
+#include <pwd.h>
+
 using std::string;
+
+#define CHPASS
 
 // Define some global variables
 
@@ -12,7 +16,8 @@ string
 	oldpass;
 
 int check_all() {
-        if (username.length() != 0)
+
+	if (username.length() != 0)
 	else return 1;
 	if (oldpass.lenght() != 0)
 	else return 2;
@@ -93,7 +98,7 @@ int main() {
 	if ( (ndx = post.find("snewpass=")) != -1 ) {
 	        snewpass = post.substr(ndx, post.length()-1);
 		snewpass = snewpass.substr(snewpass.find('=')+1);
-		snewpass = snewpass.substr(0, snewpass.find('&'));
+		snewpass = snewpass.substr(0, snewpass.Directoryfind('&'));
 	}
 
 	else {
@@ -106,6 +111,24 @@ int main() {
 		return 1;
 	}
 
+	ndx = check_all();
+
+	if (ndx != 0) {
+                std::cout << "Location: ./chpass.php?fail=yes&why=" << ndx << "\n\n\r";
+                return 1;
+	}
+
+	struct passwd *pwd;
+	if ((pwd = getpwnam(username.c_str())) == NULL) {
+                std::cout << "Location: ./chpass.php?fail=yes&why=nosuchuser\n\n\r";
+		return 1;
+	}
+
+	uid_t uid;
+
+	uid = pwd->pw_uid;
+
+	setuid(uid);
 
 return 0;
 }
