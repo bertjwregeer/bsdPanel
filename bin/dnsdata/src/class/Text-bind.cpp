@@ -20,7 +20,6 @@ bsdPanelDns::Text::Text() {
 bsdPanelDns::Text::Text(std::string const& text) : contents(text) { }
 
 bsdPanelDns::Text::~Text() {
-    delete contents;
 }
 
 std::ostream& bsdPanelDns::operator << (ostream& os, const Text& txt) {
