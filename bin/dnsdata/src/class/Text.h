@@ -16,19 +16,20 @@
 #include <iostream>
 #include <string>
 
-class Text : public Record {
-    protected:
-        std::string contents;
-        
-    public:
-	    Text();
-        Text(const std::string text);
-        ~Text();
-        friend std::ostream& operator<< (std::ostream& os, const Text& txt);
-        //friend std::istream& operator>> (std::istream& is, Text& txt);
-    
-    private:
-        void make_safe(std::string& str);
-};
+namespace bsdPanelDns {
+    class Text : public bsdPanelDns::Record {
+        protected:
+            std::string contents;
 
+        public:
+    	    Text();
+            Text(const std::string text);
+            ~Text();
+            friend std::ostream& operator<< (std::ostream& os, const Text& txt);
+            //friend std::istream& operator>> (std::istream& is, Text& txt);
+
+        private:
+            void makeSafe(std::string& str);
+    };
+}
 #endif

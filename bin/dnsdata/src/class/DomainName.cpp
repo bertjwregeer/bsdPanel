@@ -15,7 +15,7 @@
 
 #include "DomainName.h"
 
-DomainName::DomainName(const std::string& domainName) {
+bsdPanelNet::DomainName::DomainName(const std::string& domainName) {
     initCheckVars();
     try {
         domainName = checkAddress(domainName);
@@ -27,13 +27,13 @@ DomainName::DomainName(const std::string& domainName) {
     *name = pName;
 }
 
-DomainName::~DomainName() {
+bsdPanelNet::DomainName::~DomainName() {
     destroyCheckVars();
     
     delete name;
 }
 
-DomainName::isValid(const std::string& address) {
+bool bsdPanelNet::DomainName::isValid(const std::string& address) {
     initCheckVars();
     try {
         address = checkAddress(address);
@@ -47,7 +47,7 @@ DomainName::isValid(const std::string& address) {
 
 
 /** see page 143 of C++ for Java Programmers for another split function */
-DomainName::splitName(const std::string& address) {
+std::vector<std::string> bsdPanelNet::DomainName::splitName(const std::string& address) {
     std::string t;
     std::vector<std::string> v;
     std::istringstream strm(s);
@@ -58,8 +58,12 @@ DomainName::splitName(const std::string& address) {
     return v;
 }
 
-
-DomainName::checkAddress(const std::string& address) {
+/**
+ * This function/method needs to be properly ported over to use C++
+ * and not Java as it is currently half coded in. Gotta love code
+ * interleave
+ */
+std::string bsdPanelNet::DomainName::checkAddress(const std::string& address) {
     std::vector<std::string> parts = splitName(address);
 	bool valid = false;
 	
@@ -99,18 +103,18 @@ DomainName::checkAddress(const std::string& address) {
 	}
 }
 
-DomainName::destroyCheckVars() {
+void bsdPanelNet::DomainName::destroyCheckVars() {
     delete countryCodes;
     delete globalCodes;
     delete newNameCodes;
 }
 
-DomainName::initCheckVars() {
+void bsdPanelNet::DomainName::initCheckVars() {
     initCountryCodes();
     initGlobalCodes();
     initNewNameCodes();
 }
-DomainName::initCountryCodes() {
+void bsdPanelNet::DomainName::initCountryCodes() {
     countryCodes.resize(247);
     countryCode.push_back("ac");
     countryCode.push_back("ad");
@@ -361,7 +365,7 @@ DomainName::initCountryCodes() {
     countryCode.push_back("zw");
 }
 
-DomainName::initGlobalCodes() {
+void bsdPanelNet::DomainName::initGlobalCodes() {
     globalCodes.resize(6);
     globalCodes.push_back("com");
     globalCodes.push_back("net");
@@ -371,7 +375,7 @@ DomainName::initGlobalCodes() {
     globalCodes.push_back("gov");
 }
 
-DomainName::initNewNameCodes() {
+void bsdPanelNet::DomainName::initNewNameCodes() {
     newNameCodes.resize(2);
     newNameCodes.push_back("name");
     newNameCodes.push_back("info");

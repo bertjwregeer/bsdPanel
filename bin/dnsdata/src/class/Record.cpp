@@ -13,19 +13,19 @@
 
 #include "Record.h"
 
-Record::Record(DomainName& name) : ttl(14400) {
+bsdPanelDns::Record::Record(DomainName& name) : ttl(14400) {
     fqdn = new DomainName(name);
 }
 
-Record::Record(DomainName& name, int timeToLive) ttl(timeToLive) {
+bsdPanelDns::Record::Record(DomainName& name, int timeToLive) ttl(timeToLive) {
     fqdn = new DomainName(name);
 }
 
-Record::Record(Record& record) {
+bsdPanelDns::Record::Record(Record& record) {
     fqdn = new DomainName(record.fqdn);
     ttl = record.ttl;
 }
 
-Record::~Record() {
+bsdPanelDns::Record::~Record() {
     delete fqdn;
 }

@@ -14,32 +14,35 @@
 #include <string>
 #include <vector>
 
-class DomainName : public NetAddress {
-	private:
-        std::string * name;
-	    std::vector<std::string> countryCode;
-        std::vector<std::string> globalCode;
-        std::vector<std::string> newNameCode;
-        void initCheckVars();
-        void initCountryCodes();
-        void initGlobalCodes();
-        void initNewNameCodes();
-        void destroyCheckVars();
-        //void destroyCountryCodes();
-        //void destroyGlobalCodes();
-        //void destroyNewNameCodes();
+namespace bsdPanelNet {
+    class DomainName : public bsdPanelNet::Address {
+    	private:
+            std::string * name;
+    	    std::vector<std::string> countryCode;
+            std::vector<std::string> globalCode;
+            std::vector<std::string> newNameCode;
 
-    public:
-        DomainName() : name("example.com") { }
-        DomainName(const std::string& domainName);
-        DomainName(const DomainName& domainName) : name(domainName.name) { }
-        ~DomainName();
-        virtual friend std::ostream& operator<< (std::ostream& os, const DomainName& domainname);
-        virtual static bool isValid(const std::string& address);
-    
-    protected:
-        virtual std::string checkAddress(const std::string& address);
-        virtual std::vector<std::string> splitName(const std::string& address);
-};
+            // Private member functions
+            void initCheckVars();
+            void initCountryCodes();
+            void initGlobalCodes();
+            void initNewNameCodes();
+            void destroyCheckVars();
+            //void destroyCountryCodes();
+            //void destroyGlobalCodes();
+            //void destroyNewNameCodes();
 
+        public:
+            DomainName() : name("example.com") { }
+            DomainName(const std::string& domainName);
+            DomainName(const DomainName& domainName) : name(domainName.name) { }
+            ~DomainName();
+            virtual friend std::ostream& operator<< (std::ostream& os, const DomainName& domainname);
+            virtual static bool isValid(const std::string& address);
+
+        protected:
+            virtual std::string checkAddress(const std::string& address);
+            virtual std::vector<std::string> splitName(const std::string& address);
+    };
+}
 #endif

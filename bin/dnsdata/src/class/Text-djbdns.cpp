@@ -13,24 +13,24 @@
 
 #include "Text.h"
 
-Text::Text() {
+bsdPanelDns::Text::Text() {
     // empty constructor
 }
 
-Text::Text(const std::string text) {
+bsdPanelDns::Text::Text(const std::string text) {
     contents = text;
 }
 
-Text::~Text() {
+bsdPanelDns::Text::~Text() {
     delete contents;
 }
 
-std::ostream& operator<<(ostream& os, const Text& txt) {
+std::ostream& bsdPanelDns::operator<<(ostream& os, const Text& txt) {
     // Text Record   'fqdn:s:ttl:timestamp:lo
     txt.makeSafe(contents);
     os << "'" << txt.fqdn << ":" << txt.contents << ":" << txt.ttl << ":" << txt.timestamp << ":" << txt.lo << "\n";
 }
 
-Text::makeSafe(std::string& str) {
+void bsdPanelDns::Text::makeSafe(std::string& str) {
     // make the string safe for djbdns, convert symbols to octal
 }

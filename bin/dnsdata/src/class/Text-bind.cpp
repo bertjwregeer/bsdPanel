@@ -13,24 +13,24 @@
 
 #include "Text.h"
 
-Text::Text() {
+bsdPanelDns::Text::Text() {
     // empty constructor
 }
 
-Text::Text(const std::string text) {
+bsdPanelDns::Text::Text(const std::string text) {
     contents = text;
 }
 
-Text::~Text() {
+bsdPanelDns::Text::~Text() {
     delete contents;
 }
 
-std::ostream& operator<< (ostream& os, const Text& txt) {
+std::ostream& bsdPanelDns::operator<< (ostream& os, const Text& txt) {
     // Text Record    <fqdn>    IN TXT    "text information"
     os << txt.fqdn << "\tIN TXT\t\"" << txt.contents << "\"\n";
 }
 
-Text::makeSafe(std::string& str) {
+void bsdPanelDns::Text::makeSafe(std::string& str) {
     // this doesnt actually do anything in bind, but we sorta
     // have to do something to it, at least define and so on.
 }

@@ -17,18 +17,19 @@
 #include <iostream>
 #include <string>
 
-class Record {
-    protected:
-        int ttl;
-        DomainName * fqdn;
-    
-    public:
-        Record() : ttl(14400), fqdn() { };
-        Record(int timeToLive) : ttl(timeToLive), fqdn() { };
-        Record(DomainName& name);
-        Record(DomainName& name, int timeToLive);
-        Record(Record& record);
-        virtual ~Record();
-};
+namespace bsdPanelDns {
+    class Record {
+        protected:
+            int ttl;
+            DomainName * fqdn;
 
+        public:
+            Record() : ttl(14400), fqdn() { };
+            Record(int timeToLive) : ttl(timeToLive), fqdn() { };
+            Record(DomainName& name);
+            Record(DomainName& name, int timeToLive);
+            Record(Record& record);
+            virtual ~Record();
+    };
+}
 #endif
