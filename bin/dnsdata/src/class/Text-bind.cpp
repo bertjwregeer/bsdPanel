@@ -4,7 +4,7 @@
 #include "Text.h"
 
 Text::Text() {
-    contents = "";
+    // empty constructor
 }
 
 Text::Text(const string text) {
