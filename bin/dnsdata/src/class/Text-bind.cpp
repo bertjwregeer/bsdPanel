@@ -17,9 +17,7 @@ bsdPanelDns::Text::Text() {
     // empty constructor
 }
 
-bsdPanelDns::Text::Text(const std::string& text) {
-    contents = text;
-}
+bsdPanelDns::Text::Text(std::string const& text) : contents(text) { }
 
 bsdPanelDns::Text::~Text() {
     delete contents;
