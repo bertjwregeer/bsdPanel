@@ -11,8 +11,8 @@ class Text extends Record {
     public:
 	    Text();
         Text(const string text);
-        inline ostream& operator<<(ostream& os, const Text& txt);
-        //inline istream& operator>>(istream& is, Text& txt);
+        friend std::ostream& operator<< (std::ostream& os, const Text& txt);
+        //friend std::istream& operator>> (std::istream& is, Text& txt);
     
     private:
         void make_safe(string& str);
