@@ -103,6 +103,10 @@ std::string bsdPanelNet::DomainName::checkAddress(const std::string& address) {
 	}
 }
 
+std::ostream& bsdPanelNet::operator << (std::ostream& os, const DomainName& domainName) {
+    os << domainName.name;
+}
+
 void bsdPanelNet::DomainName::destroyCheckVars() {
     delete countryCodes;
     delete globalCodes;

@@ -17,7 +17,7 @@ bsdPanelDns::Text::Text() {
     // empty constructor
 }
 
-bsdPanelDns::Text::Text(const std::string text) {
+bsdPanelDns::Text::Text(const std::string& text) {
     contents = text;
 }
 
@@ -25,7 +25,7 @@ bsdPanelDns::Text::~Text() {
     delete contents;
 }
 
-std::ostream& bsdPanelDns::operator<<(ostream& os, const Text& txt) {
+std::ostream& bsdPanelDns::operator <<(ostream& os, const Text& txt) {
     // Text Record   'fqdn:s:ttl:timestamp:lo
     txt.makeSafe(contents);
     os << "'" << txt.fqdn << ":" << txt.contents << ":" << txt.ttl << ":" << txt.timestamp << ":" << txt.lo << "\n";

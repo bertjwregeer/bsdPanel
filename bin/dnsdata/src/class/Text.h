@@ -23,9 +23,9 @@ namespace bsdPanelDns {
 
         public:
     	    Text();
-            Text(const std::string text);
+            Text(const std::string& text);
             ~Text();
-            friend std::ostream& operator<< (std::ostream& os, const Text& txt);
+            friend std::ostream& operator << (std::ostream& os, const Text& txt);
             //friend std::istream& operator>> (std::istream& is, Text& txt);
 
         private:
