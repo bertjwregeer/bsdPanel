@@ -1,0 +1,107 @@
+How-To Install and configure a djbdns server for a webhost
+This guide will only outline the steps to create a public DNS server
+
+Firstly we need to install djbdns, it can be found in
+/usr/ports/dns/djbdns
+
+to compile with the dumpcache patch
+# make install -DWITH_DNSCACHE_DUMPCACHE
+or to compile with ipv6 support
+# make install -DWITH_IPV6
+This will also compile and install daemontools as a dependancy
+
+Once both have been compiled then setup daemontools (aka svscan)
+# mkdir /var/service
+# mv /usr/local/etc/rc.d/svscan.sh.sample /usr/local/etc/rc.d/svscan.sh
+# /usr/local/etc/rc.d/svscan.sh start
+
+Now we are ready to setup and configure a local dnscache and a public tinydns server
+first we will create some unpriviledged accounts for the different daemons to use
+# pw groupadd nameserver -g 800
+# pw useradd dnslog -g nameserver -u 810 -d /nonexist -s /sbin/nologin
+# pw useradd dnscache -g nameserver -u 811 -d /nonexist -s /sbin/nologin
+# pw useradd tinydns -g nameserver -u 812 -d /nonexist -s /sbin/nologin
+# pw useradd axfrdns -g nameserver -u 813 -d /nonexist -s /sbin/nologin
+
+Now to create the interal dnscache which will listen on 127.0.0.1
+# dnscache-conf dnscache dnslog /usr/local/etc/dnscache 127.0.0.1
+# ln -s /usr/local/etc/dnscache /var/service
+# echo "127.0.0.1" > /etc/resolv.conf
+
+We also should make the dns storage cache a little bigger than the default
+# echo 32000000 > /usr/local/etc/dnscache/env/CACHEIZE
+# echo 34000000 > /usr/local/etc/dnscache/env/DATALIMIT
+# svc -t /var/service/dnscache
+
+Next we need to setup the Authorative Nameserver to listen on the public ip
+# tinydns-conf tinydns dnslog /usr/local/etc/tinydns <external ip>
+# axfrdns-conf axfrdns dnslog /usr/local/etc/axfrdns /usr/local/etc/tinydns <external ip>
+
+We now need to edit the file
+/usr/local/etc/axfrdns/tcp and add the line
+:allow,AXFR="" above the :deny statement
+
+Now to finish setting up axfrdns then link tinydns and axfrdns into svscan
+# cd /usr/local/etc/axfrdns
+# make
+# cd $owd
+# ln -s /usr/local/etc/tinydns /var/service
+# ln -s /usr/local/etc/axfrdns /var/service
+
+
+
+A quick control script from the people at daemon news
+-----------------------------------------------------------------
+#!/bin/sh
+# file /usr/local/bin/dnsctl
+# daemontools control script for djbdns services
+# wcm, 2002.08.26 - 2002.08.26
+# ===
+
+SERVICES="/var/service/dnscache /var/service/dnscache/log \
+          /var/service/tinydns  /var/service/tinydns/log"
+
+case "$1" in
+start)
+    echo "Starting djbdns services"
+    svc -u ${SERVICES}
+    ;;
+stop)
+    echo "Stopping djbdns services"
+    svc -d ${SERVICES}
+    ;;
+restart)
+    echo "Restarting djbdns services"
+    svc -t ${SERVICES}
+    ;;
+status)
+    svstat ${SERVICES}
+    ;;
+cdb)
+    echo "Updating tinydns data"
+    cd /var/service/tinydns/root; tinydns-data
+    ;;
+help)
+    cat << HELP
+  start -- start up djbdns services
+   stop -- stop djbdns services
+restart -- restart djbdns services
+ status -- view current status of djbdns services
+   help -- this screen
+HELP
+    ;;
+	*)
+    echo "Usage: $0 [start|stop|restart|status|help]"
+    exit 1
+    ;;
+esac
+
+exit 0
+
+### that's all, folks!
+-----------------------------------------------------------------
+
+
+Resources used to construct this guide
+http://ezine.daemonnews.org/200210/ezdjbdns.html
+http://www.tnpi.biz/internet/dns/djbdns-freebsd.shtml
