@@ -1,3 +1,13 @@
+/************************************************************
+ *  bsdPanel DNS Nameserver section
+ *  djbDNS data manipulation client menus
+ * 
+ *  Author: StealthNinja
+ *  eMail: coder@stealth-ninja.co.uk
+ *
+ *  $Id$
+ ************************************************************/
+
 public class menu {
     public static void start() {
         System.out.println("Main Menu");

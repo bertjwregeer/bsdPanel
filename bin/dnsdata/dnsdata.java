@@ -1,6 +1,6 @@
 /************************************************************
  *  bsdPanel DNS Nameserver section
- *  djbDNS Entry Class Demo Client
+ *  djbDNS data manipulation client
  * 
  *  Author: StealthNinja
  *  eMail: coder@stealth-ninja.co.uk

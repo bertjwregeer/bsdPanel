@@ -4,6 +4,8 @@
  * 
  *  Author: StealthNinja
  *  eMail: coder@stealth-ninja.co.uk
+ *
+ *  $Id$
  ************************************************************
  * The classType is a single character representation of the 
  * different classes of DNS entries. Mapped in djbdns as
