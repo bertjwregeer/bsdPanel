@@ -16,6 +16,8 @@
 #include <iostream>
 #include <string>
 
+#include "Record.h"
+
 namespace bsdPanelDns {
     class Text : public bsdPanelDns::Record {
         protected:

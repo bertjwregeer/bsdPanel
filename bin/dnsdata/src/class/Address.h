@@ -7,13 +7,13 @@
 namespace bsdPanelNet {
     class Address {
     	protected:
-            const std::string delimiter = ".";
+            const std::string delimiter;
             virtual std::string checkAddress(const std::string& address);
 
     	public:
             Address() : delimiter(".") { }
             ~Address() { };
-            virtual static boolean isValid(const std::string& address);
+            virtual bool isValid(const std::string& address);
     };
 }
 #endif

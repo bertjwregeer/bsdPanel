@@ -8,21 +8,24 @@
 * @copyright Geoffrey Garside 2005
 * @copyright X-Istence.com 2005
 * @licence http://licence.got-w00t.co.uk/project Project
-* @Revision: $Id$ 
 */
 
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "DomainName.h"
+#include "DomainNameException.h"
 
 bsdPanelNet::DomainName::DomainName() {
+    domainCount++;
     name = "example.com";
 }
 
-bsdPanelNet::DomainName::DomainName(std::string const& domainName) {
+bsdPanelNet::DomainName::DomainName(const std::string& domainName) {
+    domainCount++;
     initCheckVars();
     try {
         domainName = checkAddress(domainName);
@@ -35,9 +38,8 @@ bsdPanelNet::DomainName::DomainName(std::string const& domainName) {
 }
 
 bsdPanelNet::DomainName::~DomainName() {
-        destroyCheckVars();
-        
-        delete name;
+    domainCount--;
+    destroyCheckVars();
 }
 
 bool bsdPanelNet::DomainName::isValid(std::string const& address) {
@@ -54,7 +56,7 @@ bool bsdPanelNet::DomainName::isValid(std::string const& address) {
 std::vector<std::string> bsdPanelNet::DomainName::splitName(const std::string& address) {
         std::string t;
         std::vector<std::string> v;
-        std::istringstream strm(s);
+        std::istringstream strm(address);
         while (std::getline(strm, t, delimiter)) {
                 v.push_back(t);
         }
@@ -68,11 +70,13 @@ std::vector<std::string> bsdPanelNet::DomainName::splitName(const std::string& a
 std::string bsdPanelNet::DomainName::checkAddress(const std::string& address) {
     std::vector<std::string> parts = splitName(address);
         
-    // /*/TODO/*/ Untested code. Should work though, but from prior knowledge, it probably won't :P
-    if (domainCode.find( parts.at(parts.size() - 1) ) ) {
+    // weeeeeee this should actually work :-P
+    std::vector<std::string>::iterator code =
+        find (domainCode.begin(), domainCode.end(), parts.at(parts.size() - 1));
+    if ( code != domainCode.end() ) {
         return address;
     } else {
-        throw InvalidDomainException();
+        throw DomainNameException("Domain suffix invalid");
     }
 }
 
@@ -81,11 +85,13 @@ std::ostream& bsdPanelNet::operator << (std::ostream& os, const DomainName& doma
 }
 
 void bsdPanelNet::DomainName::destroyCheckVars() {
-    delete domainCode;
+    if (domainCount < 1)
+        delete domainCode;
 }
 
 // /*/TODO/*/ This is an expensive operation. Should be done once, after that it should be a global variable which can be used over and over again
 void bsdPanelNet::DomainName::initCheckVars() {
+    if (domainCount < 1)
         initDomainCodes();
 }
 void bsdPanelNet::DomainName::initDomainCodes() {
