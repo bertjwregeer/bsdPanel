@@ -411,10 +411,7 @@ public class dnsdata {
     }
     
     private static void printHeader() {
-        System.out.println("StealthNinja djbDNS Data File Manipulation Client");
-        System.out.println("This client demonstrates the functions and uses");
-        System.out.println("of the DNSEntry class, for the editting of the ");
-        System.out.println("djbDNS data file from which its DNS zones are created");
+        System.out.println("djbDNS Data File Manipulation Client");
         System.out.println("\n");
     }
     
