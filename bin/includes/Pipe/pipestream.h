@@ -136,15 +136,18 @@ namespace bsdPanel {
                          */
                          
                         pipeinbuf () : fd(-1) {
+                        /*
                                 setg (buffer+pbSize,     // beginning of putback area
                                         buffer+pbSize,     // read position
                                         buffer+pbSize);    // end position
+                        */
                         }
                          
                          pipeinbuf (int myfd) : fd(myfd) {
-                                setg (buffer+pbSize,     // beginning of putback area
-                                        buffer+pbSize,     // read position
-                                        buffer+pbSize);    // end position
+                                if (myfd != -1)
+                                        setg (buffer+pbSize,     // beginning of putback area
+                                                buffer+pbSize,     // read position
+                                                buffer+pbSize);    // end position
                         }
                         
                         void attach(int _fd) {

@@ -48,8 +48,8 @@ int bsdPanel::Pipe::doPipe() {
 		case 0:
 			close(to[1]);        // Close to end of pipe
 			close(from[0]);      // Close reading end of pipe
-			dup2(to[0], 0);      // std::cin goes to 0
-			dup2(from[1], 1);    // std::cout goes to 1
+			dup2(to[0], fileno(stdin));      // std::cin goes to 0
+			dup2(from[1], fileno(stdout));    // std::cout goes to 1
 			return 0;
 		case 1:
 			close(to[0]);

@@ -4,7 +4,7 @@ CLEANFILES = Pipe_t
 
 all: $(OBJECTS)
 
-Pipe.o: Pipe.cc Pipe.h
+Pipe.o: Pipe.cc Pipe.h pipestream.h
 	${CXX} ${CXXFLAGS} ${DEBUG} -c Pipe.cc
 
 install: all

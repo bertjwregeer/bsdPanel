@@ -15,13 +15,8 @@ int main() {
                         
                         std::cerr << "In child" << std::endl;
                         
-                        std::cout << "Hello?";
-                        std::string something;
+                        execl("/bin/echo", "echo", "This", "is", "a", "bloody", "test", NULL);
                         
-                        std::cin >> something;
-                        
-                        std::cerr << "Something contains: " << something << std::endl;
-                        sleep(10);
                         _exit(0);
                         break; 
                         }
@@ -29,14 +24,11 @@ int main() {
                         {
                         std::cerr << "In parent" << std::endl;
                         std::string data;
-                        
+
                         mypipe.read(data);
                         
                         std::cerr << "data contains: " << data << std::endl;
                         
-                        mypipe.write("I am here");
-                        
-                        sleep(10);
                         }
                 default:
                         bsdPanel::exit_program();
