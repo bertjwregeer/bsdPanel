@@ -312,8 +312,10 @@ public class dnsdata {
             entry.deleteCharAt(entry.length() - 1);
         }
         
-        DNSEntry tEntry = new DNSEntry(entry.toString());
-        iDataFile.add(tEntry);
+        if (entry.length() < 0) {
+            DNSEntry tEntry = new DNSEntry(entry.toString());
+            iDataFile.add(tEntry);
+        }
     }
     private static void createHost(final char type) throws IOException {
         // Host to IP        =fqdn:ip:ttl:timestamp:lo
@@ -345,8 +347,17 @@ public class dnsdata {
             entry.deleteCharAt(entry.length() - 1);
         }
         
-        DNSEntry tEntry = new DNSEntry(entry.toString());
-        iDataFile.add(tEntry);
+        if (entry.length() < 0) {
+            DNSEntry tEntry = new DNSEntry(entry.toString());
+        
+            if (type == '=') {
+                if (checkEntry(tEntry)) {
+                    tEntry.set_classType('+');
+                }
+            }
+        
+            iDataFile.add(tEntry);
+        }
     }
     private static void createMX() throws IOException {
         // Mail Exchange    @fqdn:ip:x:dist:ttl:timestamp:lo
@@ -379,20 +390,24 @@ public class dnsdata {
             entry.deleteCharAt(entry.length() - 1);
         }
         
-        DNSEntry tEntry = new DNSEntry(entry.toString());
-        iDataFile.add(tEntry);
+        if (entry.length() < 0) {
+            DNSEntry tEntry = new DNSEntry(entry.toString());
+            iDataFile.add(tEntry);
+        }
     }
     private static void removeEntry(final char type) throws IOException {
         System.out.println("Existing Records");
         showDNSRecords(type);
         
-        System.out.println("Enter the string as shown in the existing list");
+        System.out.println("Enter the string as shown in the existing list [999 to exit]");
         System.out.print("::> ");
         System.out.flush();
         final String match = iKeyboard.readLine();
         
-        DNSEntry matchingEntry = new DNSEntry(match);
-        iDataFile.remove(matchingEntry);
+        if (!match.equals("999") || match.length() < 0) {
+            DNSEntry matchingEntry = new DNSEntry(match);
+            iDataFile.remove(matchingEntry);
+        }
     }
     
     private static void printHeader() {
@@ -401,5 +416,23 @@ public class dnsdata {
         System.out.println("of the DNSEntry class, for the editting of the ");
         System.out.println("djbDNS data file from which its DNS zones are created");
         System.out.println("\n");
+    }
+    
+    private static boolean checkEntry(final DNSEntry pEntry) {
+        final Iterator iterator = iDataFile.iterator();
+        while (iterator.hasNext()) {
+            DNSEntry entry = (DNSEntry)iterator.next();
+            if (entry.classType() == '=' && entry.ip().equals(pEntry.ip())) {
+                String dataString = entry.fqdn();
+                String testString = pEntry.fqdn();
+                if (dataString.length() > testString.length()) {
+                    return dataString.endsWith(testString);
+                } else {
+                    return testString.endsWith(dataString);
+                }
+            }
+        }
+        
+        return false;
     }
 }
