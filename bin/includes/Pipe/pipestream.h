@@ -38,7 +38,6 @@
 #include <ostream>
 #include <streambuf>
 #include <iostream>
-#include <cstudio>
 #include <cstring>
 
 #include <unistd.h>
@@ -64,7 +63,6 @@ namespace bsdPanel {
                         pipeoutbuf (int myfd) : fd(myfd) {}
                         
                         void attach (int _fd) {
-                                flush();
                                 fd = _fd;
                         }
                         
@@ -77,7 +75,7 @@ namespace bsdPanel {
                                                 return EOF;
                                         }
                                 }
-                        return c;
+                        return g;
                         }
                         
                         virtual std::streamsize xsputn (const char* s, std::streamsize num) {
@@ -96,8 +94,13 @@ namespace bsdPanel {
                 protected:
                         pipeoutbuf buf;
                 public:
-                        opipestream (int fd) : std::ostream(0), buf(fd) {
+                        opipestream (int fd = -1) : std::ostream(0), buf(fd) {
                                 rdbuf(&buf);
+                        }
+                        
+                        void attach (int fd) {
+                                flush();
+                                buf.attach(fd);
                         }
         };
         
@@ -132,7 +135,7 @@ namespace bsdPanel {
                          * => force underflow()
                          */
                          
-                         pipeinbuf () : fd(-1) {
+                        pipeinbuf () : fd(-1) {
                                 setg (buffer+pbSize,     // beginning of putback area
                                         buffer+pbSize,     // read position
                                         buffer+pbSize);    // end position
@@ -204,10 +207,14 @@ namespace bsdPanel {
          
         class ipipestream : public std::istream {
                 protected:
-                        fdinbuf buf;
+                        pipeinbuf buf;
                 public:                        
-                        ipipestream (int fd) : std::istream(0), buf(fd) {
+                        ipipestream (int fd = -1) : std::istream(0), buf(fd) {
                                 rdbuf(&buf);
+                        }
+                        
+                        void attach (int fd) {
+                                buf.attach(fd);
                         }
         };        
 }

@@ -41,16 +41,20 @@
 #include <errno.h>
 #include "bsdPanelInc.h"
 #include "Fork.h"
+#include "pipestream.h"
 
 namespace bsdPanel {
 	class Pipe : public bsdPanel::Fork {
 		public:	
 			~Pipe();
 			int doPipe();
-			friend std::istream& operator >>(std::istream& is, bsdPanel::Pipe& myPipe);
+			int read(std::string& readOver);
+			int write(const std::string& sendOver);
                 private:
                         int to[2];
                         int from[2];
+                        ipipestream reader;
+                        opipestream writer;
 	};
 }
 

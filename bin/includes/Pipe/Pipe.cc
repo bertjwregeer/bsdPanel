@@ -54,6 +54,8 @@ int bsdPanel::Pipe::doPipe() {
 		case 1:
 			close(to[0]);
 			close(from[1]);
+                        writer.attach(to[1]);
+                        reader.attach(from[0]);
 			return 1;
 		default:
 			bsdPanel::exit_program();
@@ -61,26 +63,13 @@ int bsdPanel::Pipe::doPipe() {
 	return 0; // We should never get here!
 } 
 
-std::istream& bsdPanel::operator >>(std::istream& is, bsdPanel::Pipe& myPipe) {
-        std::string sendOver;
-        
-        std::getline(is, sendOver);
-        sendOver.append("\n");
-        
-        ssize_t nwritten = 0, n, nbyte = sendOver.length();
-        
-        do {
-                if((n = write(myPipe.to[0], sendOver.c_str() + nwritten, (nbyte - nwritten))) == -1) {
-                        if (errno == EINTR) {
-                                continue;
-                        } else {
-                                std::cerr << "Unable to write to pipe.\n"; 
-                                break;
-                        }
-                }
-                nwritten += n;
-                
-        } while (nwritten < nbyte);
-        
-        return is;             
+int bsdPanel::Pipe::write(const std::string& sendOver) {
+        writer << sendOver;
+        writer.flush();
+        return sendOver.length();
+}
+
+int bsdPanel::Pipe::read(std::string& readOver) {
+        reader >> readOver;
+        return readOver.length();
 }
