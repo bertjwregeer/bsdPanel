@@ -12,7 +12,7 @@ namespace bsdPanel {
 	class Fork {
 		public:
 //			Fork();
-//			~Fork();
+//			~Fork() { std::cerr << "In ~Fork" << std::endl; };
 			int doFork();
 			
 			/*
