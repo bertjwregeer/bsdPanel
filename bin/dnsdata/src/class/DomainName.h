@@ -23,6 +23,7 @@ namespace bsdPanelNet {
             std::vector<std::string> newNameCode;
 
             // Private member functions
+            // /*/TODO/*/ Use one global with the following initialized. This takes up a ton of processing time otherwise
             void initCheckVars();
             void initCountryCodes();
             void initGlobalCodes();
