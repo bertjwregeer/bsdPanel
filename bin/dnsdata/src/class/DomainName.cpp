@@ -361,7 +361,6 @@ void bsdPanelNet::DomainName::initGlobalCodes() {
 }
 
 void bsdPanelNet::DomainName::initNewNameCodes() {
-<<<<<<< .mine
     newNameCode.resize(2);
     newNameCode.push_back("name");
     newNameCode.push_back("info");
