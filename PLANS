@@ -50,9 +50,10 @@ qMail 1.03
 vpopmail
 qMailAdmin
 spamassasin
-courier-imap
+bincimap
 djbns DNS
 MySQL
+PostGreSQL
 
 3.
 
