@@ -2,6 +2,7 @@
 #include <string>
 
 #include <pwd.h>
+#include <cstdlib>
 #include <unistd.h>
 #include <sys/types.h>
 // #include <pw_scan.h>
@@ -23,10 +24,28 @@ const string letters = lower + upper + '_';
 const string digits ("1234567890");
 const string rndchars ("\\/#$@!^*~-+");
 const string allowed = letters + digits + rndchars;
+static char const chars[] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.";
+
+string pw_pwcrypt(char *password)
+{
+	int             i;
+	char            salt[12];
+
+	static char     buf[256];
+
+	/*
+	 * Calculate a salt value
+	 */
+	for (i = 0; i < 8; i++)
+		salt[i] = chars[arc4random() % 63];
+	salt[i] = '\0';
+
+	return crypt(password, salt);
+}
 
 int check_password() {
 
-        if(newpass.find_first_not_of(allowed) == -1 && snewpass.find_first_not_of(allowed)) {
+        if(newpass.find_first_not_of(allowed, 1) == -1 && snewpass.find_first_not_of(allowed)) {
                 return 0;
 	}
 	else {
