@@ -17,7 +17,7 @@ Text::Text() {
     // empty constructor
 }
 
-Text::Text(const string text) {
+Text::Text(const std::string text) {
     contents = text;
 }
 
@@ -31,6 +31,6 @@ std::ostream& operator<<(ostream& os, const Text& txt) {
     os << "'" << txt.fqdn << ":" << txt.contents << ":" << txt.ttl << ":" << txt.timestamp << ":" << txt.lo << "\n";
 }
 
-Text::makeSafe(string& str) {
+Text::makeSafe(std::string& str) {
     // make the string safe for djbdns, convert symbols to octal
 }

@@ -18,17 +18,17 @@
 
 class Text : public Record {
     protected:
-        string contents;
+        std::string contents;
         
     public:
 	    Text();
-        Text(const string text);
+        Text(const std::string text);
         ~Text();
         friend std::ostream& operator<< (std::ostream& os, const Text& txt);
         //friend std::istream& operator>> (std::istream& is, Text& txt);
     
     private:
-        void make_safe(string& str);
+        void make_safe(std::string& str);
 };
 
 #endif

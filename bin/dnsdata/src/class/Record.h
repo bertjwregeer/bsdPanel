@@ -20,7 +20,7 @@
 class Record {
     protected:
         int ttl;
-        DomainName fqdn;
+        DomainName * fqdn;
     
     public:
         Record() : ttl(14400), fqdn() { };
