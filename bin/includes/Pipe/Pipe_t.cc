@@ -15,7 +15,7 @@ int main() {
                         
                         std::cerr << "In child" << std::endl;
                         
-                        execl("/bin/echo", "echo", "This", "is", "a", "bloody", "test", NULL);
+                        execlp("cat", "cat", NULL);
                         
                         _exit(0);
                         break; 
@@ -24,6 +24,8 @@ int main() {
                         {
                         std::cerr << "In parent" << std::endl;
                         std::string data;
+			
+			mypipe.write("Hello, i am here!!!\n");
 
                         mypipe.read(data);
                         
