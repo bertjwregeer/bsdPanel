@@ -64,3 +64,4 @@ Current features we are looking to include into this control panel:
 	c - Dynamic adding of sub-domains and entries to the httpd configuration file.
 	d - Dynamic management of FTP users, so you could offer some FTP space to a friend
 	e - Statistics created by awstats. For sub-domains and domains alike
+	f -  Limit bandwidth and disk space to certain subdomains, but only if you want to, if you elect to do it, it only has to be done for that subdomain, not all
