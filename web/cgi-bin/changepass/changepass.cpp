@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
+
 #include <pwd.h>
+#include <unistd.h>
+#include <sys/types.h>
+// #include <pw_scan.h>
 
 using std::string;
-
-#define CHPASS
 
 // Define some global variables
 
@@ -15,14 +17,31 @@ string
 	snewpass,
 	oldpass;
 
+const string lower ("abcdefghijklmnopqrstvwxyz");
+const string upper ("ABCDEFGHIJKLMNOPQRSTVWXYZ");
+const string letters = lower + upper + '_';
+const string digits ("1234567890");
+const string rndchars ("\\/#$@!^*~-+");
+const string allowed = letters + digits + rndchars;
+
+int check_password() {
+
+        if(newpass.find_first_not_of(allowed) == -1 && snewpass.find_first_not_of(allowed)) {
+                return 0;
+	}
+	else {
+                return 1;
+	}
+}
+
 int check_all() {
 
-	if (username.length() != 0)
-	else return 1;
-	if (oldpass.lenght() != 0)
-	else return 2;
-	if (newpass.length() != 0)
-	else return 3;
+	if (username.length() != 0) { }
+	else { return 1; }
+	if (oldpass.length() != 0) { }
+	else { return 2; }
+	if (newpass.length() != 0) { }
+	else { return 3; }
 
 	if (newpass.length() < 5)
 	        return 4;
@@ -31,6 +50,72 @@ int check_all() {
 
 return 0;
 
+}
+
+int get_all () {
+	int ndx = 0;
+
+	if ( (ndx = post.find("username=")) != -1 ) {
+	        username = post.substr(ndx, post.length()-1);
+		username = username.substr(username.find('=')+1);
+		username = username.substr(0, username.find('&'));
+		#ifdef DEBUG
+		        std::cout << "Username: \t" << username << "\n";
+		#endif
+	}
+
+	else {
+                std::cout << "Location: ./chpass.php?fail=yes&why=username\n\n\r";
+		return 1;
+	}
+
+	if ( (ndx = post.find("oldpass=")) != -1 ) {
+	        oldpass = post.substr(ndx, post.length()-1);
+		oldpass = oldpass.substr(oldpass.find('=')+1);
+	        oldpass = oldpass.substr(0, oldpass.find('&'));
+		#ifdef DEBUG
+		        std::cout << "Oldpass: \t" << oldpass << "\n";
+		#endif
+	}
+
+	else {
+                std::cout << "Location: ./chpass.php?fail=yes&why=oldpass\n\n\r";
+		return 1;
+	}
+
+	if ( (ndx = post.find("newpass=")) != -1 ) {
+	        newpass = post.substr(ndx, post.length()-1);
+		newpass = newpass.substr(newpass.find('=')+1);
+		newpass = newpass.substr(0, newpass.find('&'));
+		#ifdef DEBUG
+		        std::cout << "Newpass: \t" << newpass << "\n";
+		#endif
+	}
+
+	else {
+                std::cout << "Location: ./chpass.php?fail=yes&why=newpass\n\n\r";
+		return 1;
+	}
+
+	if ( (ndx = post.find("snewpass=")) != -1 ) {
+	        snewpass = post.substr(ndx, post.length()-1);
+		snewpass = snewpass.substr(snewpass.find('=')+1);
+		snewpass = snewpass.substr(0, snewpass.find('&'));
+		#ifdef DEBUG
+		        std::cout << "Snewpass: \t" << snewpass << "\n";
+		#endif
+	}
+
+	else {
+                std::cout << "Location: ./chpass.php?fail=yes&why=snewpass\n\n\r";
+		return 1;
+	}
+
+	if ( snewpass != newpass ) {
+	        std::cout << "Location: ./chpass.php?fail=yes&why=match\n\n\r";
+		return 1;
+	}
+return 0;
 }
 
 int main() {
@@ -44,91 +129,42 @@ int main() {
 
 	while ( (c = getchar()) != EOF )
 	{
-		if (i < 8190) {
-
-		        #ifdef DEBUG
-			std::cout << c;
-			#endif
-
-			post += c;
-		}
-		else {
-			// Someone is trying to give us WAY to much data
-			std::cout << "Location: ./chpass.php?fail=yes&why=tomuch\n\n\r";
-			return 1;
-		}
+                post += c;
 	}
 
-	int ndx = 0;
-
-	if ( (ndx = post.find("username=")) != -1 ) {
-	        username = post.substr(ndx, post.length()-1);
-		username = username.substr(username.find('=')+1);
-		username = username.substr(0, username.find('&'));
+        int ndz = get_all();
+	if (ndz != 0) {
+                return ndz;
 	}
 
-	else {
-                std::cout << "Location: ./chpass.php?fail=yes&why=username\n\n\r";
-		return 1;
-	}
-
-	ndx = 0;
-	if ( (ndx = post.find("oldpass=")) != -1 ) {
-	        oldpass = post.substr(ndx, post.length()-1);
-		oldpass = oldpass.substr(oldpass.find('=')+1);
-	        oldpass = oldpass.substr(0, oldpass.find('&'));
-	}
-
-	else {
-                std::cout << "Location: ./chpass.php?fail=yes&why=oldpass\n\n\r";
-		return 1;
-	}
-
-	if ( (ndx = post.find("newpass=")) != -1 ) {
-	        newpass = post.substr(ndx, post.length()-1);
-		newpass = newpass.substr(newpass.find('=')+1);
-		newpass = newpass.substr(0, newpass.find('&'));
-	}
-
-	else {
-                std::cout << "Location: ./chpass.php?fail=yes&why=newpass\n\n\r";
-		return 1;
-	}
-
-	if ( (ndx = post.find("snewpass=")) != -1 ) {
-	        snewpass = post.substr(ndx, post.length()-1);
-		snewpass = snewpass.substr(snewpass.find('=')+1);
-		snewpass = snewpass.substr(0, snewpass.Directoryfind('&'));
-	}
-
-	else {
-                std::cout << "Location: ./chpass.php?fail=yes&why=username\n\n\r";
-		return 1;
-	}
-
-	if ( snewpass != newpass ) {
-	        std::cout << "Location: ./chpass.php?fail=yes&why=match\n\n\r";
-		return 1;
-	}
-
-	ndx = check_all();
+	int ndx = check_all();
 
 	if (ndx != 0) {
                 std::cout << "Location: ./chpass.php?fail=yes&why=" << ndx << "\n\n\r";
                 return 1;
 	}
 
-	struct passwd *pwd;
-	if ((pwd = getpwnam(username.c_str())) == NULL) {
+	struct passwd *pw;
+
+        // Check if the user exists
+	if ((pw = getpwnam(username.c_str())) == NULL) {
                 std::cout << "Location: ./chpass.php?fail=yes&why=nosuchuser\n\n\r";
 		return 1;
 	}
 
-	uid_t uid;
+	// Check if the password provided is the correct one
 
-	uid = pwd->pw_uid;
+	if (strcmp( crypt(oldpass.c_str() ,pw->pw_passwd), pw->pw_passwd)) {
+	        std::cout << "Location: ./chpass.php?fail=yes&why=oldpass_incorrect\n\n\r";
+		return 1;
+	}
 
-	setuid(uid);
+	// Check the password, to make sure it only contains valid characters.
+
+	if (check_password()) {
+	        std::cout << "Location: ./chpass.php?fail=yes&why=newpass_invalid_char\n\n\r";
+		return 1;
+	}
 
 return 0;
 }
