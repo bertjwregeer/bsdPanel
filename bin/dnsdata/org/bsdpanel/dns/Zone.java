@@ -6,9 +6,7 @@
  * are present so that a zone can be properly created.
  *
  * @author Geoffrey Garside <ggarside@got-w00t.co.uk>
- * @version 1.0
- * @copyright 2005
- * @license http://bsdpanel.org/license
+ * @version $Id$
  */
 
 package org.bsdpanel.dns;
@@ -18,18 +16,15 @@ public class Zone {
 	protected Nameserver primary;
 	protected Nameserver secondary;
 	
-	protected Host domain;
-	protected Alias www;
+	protected Address origin;	// the default fqdn for each host entry.
 	
-	protected LinkedList records;	// this list will store additional records of type A, MX, CNAME and TXT
+	protected LinkedList hosts;	// this list will store additional records of type A, MX, CNAME and TXT
 	
-	protected MailExchange mx;
+	protected LinkedList mx;	// MailExchange lists
 	
 	protected int TTL;
 	
-	// BiND Zone Components
-	// Export to a BiNDZone class
-	//private Maintainer maintainer;
+	protected String maintainer = "hostmaster";
 	
 	public Zone() {
 		TTL = 86400;
