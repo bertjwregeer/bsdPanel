@@ -46,10 +46,10 @@ int bsdPanel::Pipe::doPipe() {
 
 	switch ( doFork() ) {
 		case 0:
-			close(to[1]);
-			close(from[0]);
-			dup2(to[0], 0);
-			dup2(from[1], 1);
+			close(to[1]);        // Close to end of pipe
+			close(from[0]);      // Close reading end of pipe
+			dup2(to[0], 0);      // std::cin goes to 0
+			dup2(from[1], 1);    // std::cout goes to 1
 			return 0;
 		case 1:
 			close(to[0]);
@@ -72,4 +72,13 @@ int bsdPanel::Pipe::write(const std::string& sendOver) {
 int bsdPanel::Pipe::read(std::string& readOver) {
         reader >> readOver;
         return readOver.length();
+}
+
+
+bsdPanel::Pipe::~Pipe() {
+        // Close any and all pipes. Don't care if it fails or not
+        close(to[0]);
+        close(to[1]);
+        close(from[0]);
+        close(from[1]);
 }

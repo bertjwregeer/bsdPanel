@@ -57,13 +57,5 @@ namespace bsdPanel {
                         opipestream writer;
 	};
 }
-
-bsdPanel::Pipe::~Pipe() {
-        // Close any and all pipes. Don't care if it fails or not
-        close(to[0]);
-        close(to[1]);
-        close(from[0]);
-        close(from[1]);
-}
 	
 #endif
