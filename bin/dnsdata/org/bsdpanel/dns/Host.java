@@ -1,4 +1,5 @@
-public class Host extends Record {
-	protected IpAddress ip;
-	
+public class Host extends HostType {
+	public Host() {
+		
+	}
 }
