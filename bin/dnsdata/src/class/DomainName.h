@@ -17,21 +17,14 @@
 namespace bsdPanelNet {
     class DomainName : public bsdPanelNet::Address {
     	private:
-            std::string * name;
-    	    std::vector<std::string> countryCode;
-            std::vector<std::string> globalCode;
-            std::vector<std::string> newNameCode;
+            std::string name;
+    	    std::vector<std::string> domainCode;
 
             // Private member functions
             // /*/TODO/*/ Use one global with the following initialized. This takes up a ton of processing time otherwise
             void initCheckVars();
-            void initCountryCodes();
-            void initGlobalCodes();
-            void initNewNameCodes();
+            void initDomainCodes();
             void destroyCheckVars();
-            //void destroyCountryCodes();
-            //void destroyGlobalCodes();
-            //void destroyNewNameCodes();
 
         public:
             DomainName();
