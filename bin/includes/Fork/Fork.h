@@ -11,8 +11,8 @@
 namespace bsdPanel {
 	class Fork {
 		public:
-			Fork();
-			virtual ~Fork() = 0;
+//			Fork();
+//			~Fork();
 			int doFork();
 			
 			/*
@@ -35,7 +35,5 @@ namespace bsdPanel {
                         struct sigaction oldact;
 	};
 }
-
-bsdPanel::Fork::~Fork() {};
 
 #endif
