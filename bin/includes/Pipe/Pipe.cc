@@ -70,7 +70,7 @@ int bsdPanel::Pipe::write(const std::string& sendOver) {
 }
 
 int bsdPanel::Pipe::read(std::string& readOver) {
-        reader >> readOver;
+        std::getline(reader, readOver);
         return readOver.length();
 }
 
