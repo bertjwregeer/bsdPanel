@@ -16,8 +16,6 @@
  * "C" produces a CNAME for point a name at another name
  ************************************************************/
 
-import java.util.StringTokenizer;
-
 public class DNSEntry implements Comparable {
     private static int iEntries = 0;         /* So we can keep track of the number of DNS Entries we have */
     private static final String sep = ":";   /* djbdns separator */
@@ -57,91 +55,74 @@ public class DNSEntry implements Comparable {
     
     // Constructor SubFunctions
     private void constructNS(final String pNSEntry) {
-        StringTokenizer tToken = new StringTokenizer(pNSEntry, sep);
-        String part = tToken.nextToken();
-        classType = part.charAt(0);
-        fqdn = part.substring(1);
-        
-        String tIP = tToken.nextToken();
-        if (tIP.length() > 0)
-            ip = tIP;
+        String[] pieces = pNSEntry.split(sep);
+        classType = pieces[0].charAt(0);
+        fqdn = pieces[0].substring(1);
+        if (!pieces.equals("null") && pieces[1].length() > 0)
+            ip = pieces[1];
         else
             ip = "";
-        
-        x = tToken.nextToken();
+        x = pieces[2];
         
         // optional so these sections might not be there
-        if (tToken.hasMoreTokens()) {
-            String tTTLString = tToken.nextToken();
-            if (tTTLString.length() > 0)
-                ttl = Integer.parseInt(tTTLString);
+        if (pieces.length >= 4) {
+            if (pieces[3].length() > 0)
+                ttl = Integer.parseInt(pieces[3]);
         }
-        if (tToken.hasMoreTokens()) {
-            String tTimestamp = tToken.nextToken();
-            if (tTimestamp.length() > 0)
-                timestamp = tTimestamp;
+        if (pieces.length >= 5) {
+            if (pieces[4].length() > 0)
+                timestamp = pieces[4];
         }
-        if (tToken.hasMoreTokens()) {
-            String tLO = tToken.nextToken();
-            if (tLO.length() > 0)
-                lo = tLO;
+        if (pieces.length >= 6) {
+            if (pieces[5].length() > 0)
+                lo = pieces[5];
         }
     }
     
     private void constructHost(final String pHostEntry) {
-        /*/*/System.out.println(pHostEntry);
-        StringTokenizer tToken = new StringTokenizer(pHostEntry, sep);
-        String part = tToken.nextToken();
-        classType = part.charAt(0);
-        fqdn = part.substring(1);
-        ip = tToken.nextToken();
+        String[] pieces = pHostEntry.split(sep);
+        classType = pieces[0].charAt(0);
+        fqdn = pieces[0].substring(1);
+        ip = pieces[1];
         
         // optional so these sections might not be there
-        if (tToken.hasMoreTokens()) {
-            String tTTLString = tToken.nextToken();
-            if (tTTLString.length() > 0)
-                ttl = Integer.parseInt(tTTLString);
+        if (pieces.length >= 3) {
+            if (pieces[2].length() > 0)
+                ttl = Integer.parseInt(pieces[2]);
         }
-        if (tToken.hasMoreTokens()) {
-            String tTimestamp = tToken.nextToken();
-            if (tTimestamp.length() > 0)
-                timestamp = tTimestamp;
+        if (pieces.length >= 4) {
+            if (pieces[3].length() > 0)
+                timestamp = pieces[3];
         }
-        if (tToken.hasMoreTokens()) {
-            String tLO = tToken.nextToken();
-            if (tLO.length() > 0)
-                lo = tLO;
+        if (pieces.length >= 5) {
+            if (pieces[4].length() > 0)
+                lo = pieces[4];
         }
     }
 
     private void constructMX(final String pMXEntry) {
-        StringTokenizer tToken = new StringTokenizer(pMXEntry, sep);
-        String part = tToken.nextToken();
-        classType = part.charAt(0);
-        fqdn = part.substring(1);
-        ip = tToken.nextToken();
-        x = tToken.nextToken();
+        String[] pieces = pMXEntry.split(sep);
+        classType = pieces[0].charAt(0);
+        fqdn = pieces[0].substring(1);
+        ip = pieces[1];
+        x = pieces[2];
 
         // optional so these sections might not be there
-        if (tToken.hasMoreTokens()) {
-            String tDistString = tToken.nextToken();
-            if (tDistString.length() > 0)
-                dist = Integer.parseInt(tDistString);
+        if (pieces.length >= 4) {
+            if (pieces[3].length() > 0)
+                dist = Integer.parseInt(pieces[3]);
         }
-        if (tToken.hasMoreTokens()) {
-            String tTTLString = tToken.nextToken();
-            if (tTTLString.length() > 0)
-                ttl = Integer.parseInt(tTTLString);
+        if (pieces.length >= 5) {
+            if (pieces[4].length() > 0)
+                ttl = Integer.parseInt(pieces[4]);
         }
-        if (tToken.hasMoreTokens()) {
-            String tTimestamp = tToken.nextToken();
-            if (tTimestamp.length() > 0)
-                timestamp = tTimestamp;
+        if (pieces.length >= 6) {
+            if (pieces[5].length() > 0)
+                timestamp = pieces[5];
         }
-        if (tToken.hasMoreTokens()) {
-            String tLO = tToken.nextToken();
-            if (tLO.length() > 0)
-                lo = tLO;
+        if (pieces.length >= 7) {
+            if (pieces[6].length() > 0)
+                lo = pieces[6];
         }
     }
     
