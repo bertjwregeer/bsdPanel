@@ -1,6 +1,7 @@
 OBJECTS = Pipe.o
 CXXFLAGS = -I. -I.. -I../Fork/ -Wall
 CLEANFILES = Pipe_t
+REQUIRE = Fork sighandler
 
 all: $(OBJECTS)
 

@@ -1,7 +1,7 @@
 OBJECTS = Fork.o
 CXXFLAGS = -I.. -Wall
 CLEANFILES=Fork_t
-
+REQUIRE = sighandler
 
 all: $(OBJECTS)
 
@@ -16,9 +16,7 @@ clean:
 cleandir: clean
 
 Fork_t: Fork.o Fork_t.cc
-#	@${ECHO_CMD} "===> Compiling test for the Fork class."
 	${CXX} ${CXXFLAGS} ${DEBUG} Fork_t.cc ../sighandler.o Fork.o -o Fork_t
-#	@${ECHO_CMD} "===> Done. Run it with make testrun"
 
 test: Fork_t
 
