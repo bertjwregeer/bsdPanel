@@ -71,27 +71,6 @@ namespace bsdPanel {
 
 #endif
 
-#ifndef HAVEOWNHANDLERS
 namespace sighandlers {
-        static void sig_chld(int signo) 
-        {
-                pid_t mypid;
-                int status, child_val;
-        
-                /* Wait for any child without blocking */
-                if ((mypid = waitpid(-1, &status, WNOHANG)) < 0) {
-                        return;
-                }
-        
-                /*
-                * We now have the info in 'status' and can manipulate it using
-                * the macros in wait.h.
-                */
-                if (WIFEXITED(status))                /* did child exit normally? */
-                {
-                        child_val = WEXITSTATUS(status); /* get child's exit status */
-                        std::cerr << "Child: " << mypid << " has exited with status: " << child_val << "\n";
-                }
-        }
+	extern void sig_chld(int);
 }
-#endif

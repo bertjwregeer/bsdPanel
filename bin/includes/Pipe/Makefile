@@ -16,9 +16,9 @@ cleandir: clean
 
 
 Pipe_t: Pipe.o Pipe_t.cc
-#	@${ECHO} "===> Compiling test for the Pipe class."
+#	@${ECHO_CMD} "===> Compiling test for the Pipe class."
 	${CXX} ${CXXFLAGS} ${DEBUG} Pipe_t.cc Pipe.o ../Fork/Fork.o -o Pipe_t
-#	@${ECHO} "===> Done. Run it with make testrun"
+#	@${ECHO_CMD} "===> Done. Run it with make testrun"
 
 test: Pipe_t
 

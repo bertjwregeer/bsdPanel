@@ -6,17 +6,16 @@ int main() {
         std::cerr << "Pipe_t started" << std::endl;
 
         bsdPanel::Pipe mypipe;
-        // mypipe.sigHandler();
+        mypipe.sigHandler();
         
         switch ( mypipe.doPipe() ) {
                 case 0:
                         {
-                        sleep(5);
-                        
                         std::cerr << "In child" << std::endl;
                         
-                        execlp("cat", "cat", NULL);
+                        // execlp("cat", "cat", NULL);
                         
+                        execlp("ls", "ls", "-alh", NULL);
                         _exit(0);
                         break; 
                         }
@@ -24,12 +23,37 @@ int main() {
                         {
                         std::cerr << "In parent" << std::endl;
                         std::string data;
+			std::string gotwhat;
 			
-			mypipe.write("Hello, i am here!!!\n");
-
-                        mypipe.read(data);
+			// std::cout << "Enter some random info to send over to cat" << std::endl;
+			// std::getline(std::cin, data);
+			
+			// mypipe.write(data.append("\n"));
                         
-                        std::cerr << "data contains: " << data << std::endl;
+			mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
+                        mypipe.read(gotwhat);
+                        std::cerr << "data contains: " << gotwhat << std::endl;
                         
                         break;
                         }
