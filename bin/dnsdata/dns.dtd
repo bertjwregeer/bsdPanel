@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ DNS DocType
+ 
+ @author Stealth-Ninja <xml@stealth-ninja.co.uk>
+ @url http://stealth-ninja.co.uk/
+ @copyright 2004
+ @license http://stealth-ninja.co.uk/license/public
+ @cvs $Id$
+ 
+ Public Identifier "-//SN//General//DNS"
+ Link Path "http://stealth-ninja.co.uk/dtd/dns.dtd"
+ Declaration:
+     <!DOCTYPE dns PUBLIC "-//SN//General//DNS" "http://stealth-ninja.co.uk/dtd/dns.dtd">
+ 
+ Version History:
+ 1.1 - Multiple Domains supported [not backwards compatible, but not yet released]
+     domain tag moved into root child
+     defaults container added
+         stores basic domain wide default settings and domain owner
+     nameservers reworked
+         nameserver container
+             primary - stores primary dns server details
+             secondary - stores secondary dns server details
+             soa - stores additional authoritive dns server details
+             ns - stores non authoritive dns server details
+ 1.0 - Initial Creation
+     nameserver, mx, a, alias and cname types
+ -->
+<!ELEMENT dns (domain)+>
+    <!ATTLIST dns version CDATA #FIXED "1.1">
+    <!ELEMENT domain (defaults, nameservers, mx+, a+, (alias|cname)*)>
+        <!ATTLIST domain id ID #REQUIRED>
+        <!ELEMENT defaults (owner, ttl)>
+            <!ELEMENT owner (#PCDATA)>
+            <!ELEMENT ttl (#PCDATA)>
+        <!ELEMENT nameservers (primary, secondary, (soa|ns)*)>
+            <!ELEMENT primary (#PCDATA)>
+                <!ATTLIST primary ip CDATA #IMPLIED>
+            <!ELEMENT secondary (#PCDATA)>
+                <!ATTLIST secondary ip CDATA #IMPLIED>
+            <!ELEMENT soa (#PCDATA)>
+                <!ATTLIST soa ip CDATA #IMPLIED>
+            <!ELEMENT ns (#PCDATA)>
+                <!ATTLIST ns ip CDATA #IMPLIED>
+        <!ELEMENT mx (#PCDATA)>
+            <!ATTLIST mx
+                priority CDATA #REQUIRED
+                ip CDATA #REQUIRED>
+        <!ELEMENT a (#PCDATA)>
+            <!ATTLIST a ip CDATA #REQUIRED>
+        <!ELEMENT alias (#PCDATA)>
+            <!ATTLIST alias for CDATA #REQUIRED>
+        <!ELEMENT cname (#PCDATA)>
+            <!ATTLIST cname for CDATA #REQUIRED>
