@@ -14,15 +14,15 @@
 #include "Record.h"
 
 bsdPanelDns::Record::Record(DomainName& name) : ttl(14400) {
-    fqdn = new DomainName(name);
+    fqdn = new bsdPanelNet::DomainName(name);
 }
 
 bsdPanelDns::Record::Record(DomainName& name, int timeToLive) ttl(timeToLive) {
-    fqdn = new DomainName(name);
+    fqdn = new bsdPanelNet::DomainName(name);
 }
 
 bsdPanelDns::Record::Record(Record& record) {
-    fqdn = new DomainName(record.fqdn);
+    fqdn = new bsdPanelNet::DomainName(record.fqdn);
     ttl = record.ttl;
 }
 

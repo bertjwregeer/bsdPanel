@@ -21,13 +21,13 @@ namespace bsdPanelDns {
     class Record {
         protected:
             int ttl;
-            DomainName * fqdn;
+            bsdPanelNet::DomainName * fqdn;
 
         public:
             Record() : ttl(14400), fqdn() { };
             Record(int timeToLive) : ttl(timeToLive), fqdn() { };
-            Record(DomainName& name);
-            Record(DomainName& name, int timeToLive);
+            Record(bsdPanelNet::DomainName& name);
+            Record(bsdPanelnet::DomainName& name, int timeToLive);
             Record(Record& record);
             virtual ~Record();
     };
