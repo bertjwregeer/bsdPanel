@@ -7,3 +7,8 @@ Pipe.o: Pipe.cc Pipe.h
 	${CXX} ${CXXFLAGS} ${DEBUG} -c Pipe.cc
 
 install: all
+
+clean:
+	/bin/rm -rf *.o
+
+cleandir: clean

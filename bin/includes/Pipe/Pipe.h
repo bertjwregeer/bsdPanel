@@ -12,8 +12,7 @@
 namespace bsdPanel {
 	class Pipe : public bsdPanel::Fork {
 		public:	
-			Pipe();
-			virtual ~Pipe() = 0;
+			~Pipe();
 			int doPipe();
 			friend std::istream& operator >>(std::istream& is, bsdPanel::Pipe& myPipe);
                 private:
