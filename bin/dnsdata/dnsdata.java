@@ -4,6 +4,8 @@
  * 
  *  Author: StealthNinja
  *  eMail: coder@stealth-ninja.co.uk
+ *
+ *  $Id$
  ************************************************************/
 
 import java.io.InputStreamReader;
