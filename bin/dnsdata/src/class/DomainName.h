@@ -34,12 +34,12 @@ namespace bsdPanelNet {
             //void destroyNewNameCodes();
 
         public:
-            DomainName() : name("example.com") { }
-            DomainName(const std::string& domainName);
+            DomainName();
+            DomainName(std::string const& domainName);
             DomainName(const DomainName& domainName) : name(domainName.name) { }
             ~DomainName();
-            virtual friend std::ostream& bsdPanelNet::operator << (std::ostream& os, const DomainName& domainname);
-            virtual static bool isValid(const std::string& address);
+            friend std::ostream& bsdPanelNet::operator << (std::ostream& os, const DomainName& domainname);
+            static bool isValid(std::string const& address);
 
         protected:
             virtual std::string checkAddress(const std::string& address);
