@@ -88,7 +88,7 @@ void bsdPanelNet::DomainName::destroyCheckVars() {
 void bsdPanelNet::DomainName::initCheckVars() {
         initDomainCodes();
 }
-void bsdPanelNet::DomainName::initCountryCodes() {
+void bsdPanelNet::DomainName::initDomainCodes() {
     domainCode.resize(257);
     
     // Country Level Domain Names
