@@ -1,3 +1,5 @@
+package org.bsdpanel.dns;
+
 public abstract class Record {
 	protected DomainName fqdn;
     protected int ttl = 14400;

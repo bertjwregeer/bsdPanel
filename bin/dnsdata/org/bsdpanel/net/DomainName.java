@@ -1,3 +1,5 @@
+package org.bsdpanel.net;
+
 public class DomainName extends Address {
 	private String name;
 	private String[] countryCode = {"ac", "ad", "ae", "af", "ag", "ai", "al", 

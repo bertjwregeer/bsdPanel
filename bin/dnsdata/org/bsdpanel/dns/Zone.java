@@ -11,6 +11,9 @@
  * @license http://bsdpanel.org/license
  */
 
+package org.bsdpanel.dns;
+
+
 public class Zone {
 	protected Nameserver primary;
 	protected Nameserver secondary;

@@ -1,3 +1,5 @@
+package org.bsdpanel.dns;
+
 public class Text extends Record {
 	protected String contents;
 	public Text() {

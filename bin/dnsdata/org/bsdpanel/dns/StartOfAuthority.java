@@ -1,3 +1,5 @@
+package org.bsdpanel.dns;
+
 public class StartOfAuthority extends Nameserver {
     protected String soaAdmin;
     public StartOfAuthority() {

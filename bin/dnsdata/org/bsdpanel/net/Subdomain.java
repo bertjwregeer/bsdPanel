@@ -1,3 +1,5 @@
+package org.bsdpanel.net;
+
 public class Subdomain extends DomainName {
     protected String subdomain;
     public Subdomain() {

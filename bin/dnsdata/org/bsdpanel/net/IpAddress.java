@@ -1,3 +1,5 @@
+package org.bsdpanel.net;
+
 public class IpAddress extends Address {
 	private int[] octet;
 	private final String local = "127.0.0.1";

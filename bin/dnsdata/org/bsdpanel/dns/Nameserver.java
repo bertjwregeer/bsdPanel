@@ -1,3 +1,5 @@
+package org.bsdpanel.dns;
+
 public class Nameserver extends Record {
     protected IpAddress ip;
     protected DomainName ns;

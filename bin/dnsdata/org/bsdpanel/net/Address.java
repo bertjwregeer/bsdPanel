@@ -1,3 +1,5 @@
+package org.bsdpanel.net;
+
 public abstract class Address {
 	protected final String delimiter ".";
 	
