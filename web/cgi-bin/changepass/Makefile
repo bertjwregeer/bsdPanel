@@ -21,18 +21,5 @@ CFLAGS+=-DYP -I.
 DPADD=  ${LIBCRYPT} ${LIBUTIL}
 LDADD+= -lcrypt -lutil
 
-install:
-#	chmod 755 ${PROG}
-#	cp -f ${PROG} ${CGIBIN}/
-#	chmod u+s ${CGIBIN}/${PROG}
-#	touch ${HISTORYDIR}/${HISTORYFILE}
-#	chmod 200 ${HISTORYDIR}/${HISTORYFILE}
-#	cp -f ${PROG}.1.gz ${MANPATH}/wwwpasswd.1.gz
-
-deinstall:
-#	rm -f ${CGIBIN}/${PROG}
-#	rm -f ${HISTORYDIR}/${HISTORYFILE}
-#	rm -f ${MANPATH}/wwwpasswd.1.gz
-
 .include <bsd.prog.mk>
 
