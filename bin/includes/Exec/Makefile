@@ -1,4 +1,4 @@
-OBJECTS = Pipe
+OBJECTS = Exec
 CXXFLAGS = -I.. -I. -Wall
 
 all: $(OBJECTS).o

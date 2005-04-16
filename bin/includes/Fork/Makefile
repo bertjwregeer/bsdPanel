@@ -1,24 +1,14 @@
-OBJECTS = Fork.o
-CXXFLAGS = -I.. -Wall
-CLEANFILES=Fork_t
-REQUIRE = sighandler
+OBJECTS = Fork
+CXXFLAGS = -I.. -I. -Wall
 
-all: $(OBJECTS)
+all: $(OBJECTS).o
 
-Fork.o: Fork.cc Fork.h
-	${CXX} ${CXXFLAGS} ${DEBUG} -c Fork.cc
+$(OBJECTS): $(OBJECTS).cc $(OBJECTS).h
+	${CXX} ${CXXFLAGS} ${DEBUG} -c $(OBJECTS).cc
 
 install: all
 
 clean:
-	/bin/rm -rf *.o $(CLEANFILES)
+	/bin/rm -rf $(OBJECTS).o
 
 cleandir: clean
-
-Fork_t: Fork.o Fork_t.cc
-	${CXX} ${CXXFLAGS} ${DEBUG} Fork_t.cc ../sighandler.o Fork.o -o Fork_t
-
-test: Fork_t
-
-testrun: test
-	/bin/sh -c './Fork_t'
