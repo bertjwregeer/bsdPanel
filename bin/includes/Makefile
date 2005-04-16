@@ -1,3 +1,3 @@
-SUBDIR= Fork Pipe
+SUBDIR= Fork Pipe Exec
 
 .include <bsd.subdir.mk>
