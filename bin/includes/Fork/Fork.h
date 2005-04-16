@@ -39,38 +39,14 @@
 #include <signal.h>     /* header for signal functions */
 #include <unistd.h>
 #include <iostream>
-#include "bsdPanelInc.h"
+#include <bsdPanelInc.h>
 
 namespace bsdPanel {
 	class Fork {
 		public:
-//			Fork();
-//			~Fork() { std::cerr << "In ~Fork" << std::endl; };
 			int doFork();
-			
-			/*
-			 * sighandler should be created by main(), as that
-			 * is the only place in the app that has intimate
-			 * knowledge of the way Fork is stored somewhere
-			 * 
-			 * We assign the signal handling to 
-			 * sighandlers::sig_chld. Define HAVEOWNHANDLERS
-			 * and create your own sighandlers::sig_chld
-			 * and we will use that instead of the one we
-			 * have standard.
-			 */
-			 
-			void sigHandler();
-                private:
-                        pid_t pid;
-                        int dead;
-                        struct sigaction act;
-                        struct sigaction oldact;
+			pid_t pid;
 	};
 }
 
 #endif
-
-namespace sighandlers {
-	extern void sig_chld(int);
-}

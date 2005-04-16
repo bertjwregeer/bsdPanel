@@ -40,9 +40,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
-#include "bsdPanelInc.h"
-#include "Fork.h"
-#include "pipestream.h"
+#include <bsdPanelInc.h>
+#include <Fork/Fork.h>
+#include <Pipe/pipestream.h>
 
 namespace bsdPanel {
 	class Pipe : public bsdPanel::Fork {

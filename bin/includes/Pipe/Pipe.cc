@@ -31,7 +31,7 @@
  * $Id$
  */
 
-#include "Pipe.h"
+#include <Pipe.h>
 
 int bsdPanel::Pipe::doPipe() {
 	if ( pipe(to) == -1) {

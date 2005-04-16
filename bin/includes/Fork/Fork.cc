@@ -31,7 +31,7 @@
  * $Id$
  */
 
-#include "Fork.h"
+#include <Fork.h>
 
 int bsdPanel::Fork::doFork () {
 
@@ -48,23 +48,4 @@ int bsdPanel::Fork::doFork () {
 			return 1;
 	}
 	return 0;
-}
-
-void bsdPanel::Fork::sigHandler() {
-        
-        // Assign sig_chld as our SIGCHLD handler
-        act.sa_handler = sighandlers::sig_chld;
-        
-        sigemptyset(&act.sa_mask);
-        
-        /*
-        * We're only interested in children that have terminated, not ones
-        * which have been stopped (eg user pressing control-Z at terminal)
-        */
-        act.sa_flags = SA_NOCLDSTOP;
-        if (sigaction(SIGCHLD, &act, &oldact) < 0) {
-                std::cerr << "Sigaction failed\n";
-                bsdPanel::exit_program();
-        }
-        return;
 }
