@@ -3,7 +3,7 @@ CXXFLAGS = -I.. -I. -Wall
 
 all: $(OBJECTS).o
 
-$(OBJECTS): $(OBJECTS).cc $(OBJECTS).h
+$(OBJECTS).o: $(OBJECTS).cc $(OBJECTS).h
 	${CXX} ${CXXFLAGS} ${DEBUG} -c $(OBJECTS).cc
 
 install: all
