@@ -35,12 +35,14 @@
 #define BSDPANEL_EXEC
 
 #include <iostream>
+#include <exception>
 #include <string>
 #include <vector>
 #include <memory>
 #include <unistd.h>
 #include <bsdPanelInc.h>
 #include <Pipe/Pipe.h>
+#include <Exceptions/Exceptions.h>
 
 #define MAXARG 512
 
@@ -48,28 +50,12 @@ namespace bsdPanel {
         class Exec : public bsdPanel::Pipe {
                 public:
                         typedef std::auto_ptr<Exec> Ptr;
-                        Exec(std::string& _prog, std::vector<std::string>& _args);
-                        Exec(std::string& _prog, std::vector<std::string>& _args, std::vector<std::string>& _env);
+                        Exec( std::vector<std::string> const & _args);
+                        Exec( std::vector<std::string> const & _args, std::vector<std::string> const & _env);
                         ~Exec();
                         int doExec();
-                        
-                        class TooManyArgs : public std::exception {
-                                public:
-                                        TooManyArgs();
-                        };
-                        
-                        class TooManyEnv : public std::exception {
-                                public:
-                                        TooManyEnv();
-                        };
-                        
-                        class NoArgs : public std::exception {
-                                public:
-                                        NoArgs();
-                        };
-                        
+                          
                 private:
-                        std::string prog;
                         std::vector<std::string> args;
                         std::vector<std::string> env;
         };

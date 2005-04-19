@@ -33,70 +33,59 @@
  
 #include <Exec.h>
  
-bsdPanel::Exec::Exec(std::string& _prog, std::vector<std::string>& _args) : prog(_prog), args(_args) {
+bsdPanel::Exec::Exec( std::vector<std::string> const & _args) : args(_args) {
         if (args.size() > MAXARG)
-                throw bsdPanel::Exec::TooManyArgs();
+                throw bsdPanel::TooManyArgs();
 }
 
-bsdPanel::Exec::Exec(std::string& _prog, std::vector<std::string>& _args, std::vector<std::string>& _env) : prog(_prog), args(_args), env(_env) {
+bsdPanel::Exec::Exec( std::vector<std::string> const & _args,  std::vector<std::string> const & _env) : args(_args), env(_env) {
         if (args.size() > MAXARG)
-                throw bsdPanel::Exec::TooManyArgs();
+                throw bsdPanel::TooManyArgs();
         if (env.size() > MAXARG)
-                throw bsdPanel::Exec::TooManyEnv();
+                throw bsdPanel::TooManyEnv();
 }
 
 int bsdPanel::Exec::doExec() {
-        char *argv[MAXARG];
-        char *envi[MAXARG];
+        char **argv;
+        char **envi;
+	std::string prog = args.at(0);
         
         if (args.size() > 0) {
+                argv = new char*[args.size()];
                 int i = 0;
                 for (std::vector<std::string>::iterator a = args.begin(), b = args.end(); 
-                        a!=b; ++a) {
-                        argv[i] = new char[a->length() + 1]; 
-                        strcpy(argv[i], a->c_str());
+                        a!=b; a++) {
+                        argv[i] = new char[(a)->length() + 1]; 
+                        strcpy(argv[i], (a)->c_str());
                         i++;
                 }
         }
         
         if (env.size() > 0) {
+                envi = new char*[env.size()];
                 int i = 0;
                 for (std::vector<std::string>::iterator a = env.begin(), b = env.end(); 
-                        a!=b; ++a) {
-                        envi[i] = new char[a->length() + 1]; 
-                        strcpy(envi[i], a->c_str());
+                        a!=b; a++) {
+                        envi[i] = new char[(a)->length() + 1]; 
+                        strcpy(envi[i], (a)->c_str());
                         i++;
                 }
         }
         
-        if ( (args.size() > 0) && (env.size() == 0) ) {
-                switch(doPipe()) {
-                        case 0:
+        switch(doPipe()) {
+                case 0:
+                        if ( (args.size() > 0) && (env.empty()) )
                                 execv(prog.c_str(), argv);
-                                bsdPanel::exit_program(-1);
-                                break;
-                        case 1:
-                                return 1;
-                        default:
-                                bsdPanel::exit_program();
-                                // If we get here there is a more serious problem :P
-                }
-        }
-        else if ( (args.size() > 0) && (env.size() > 0) ) {
-                switch(doPipe()) {
-                        case 0:
+                        if ( (args.size() > 0) && (env.size() > 0) )
                                 execve(prog.c_str(), argv, envi);
-                                bsdPanel::exit_program(-1);
-                                break;
-                        case 1:
-                                return 1;
-                        default:
-                                bsdPanel::exit_program();
-                                // If we get here there are more serious problems :P
-                }
-        }
-        else {
-                throw bsdPanel::Exec::NoArgs();
+                                                                             
+                        _exit(-1);
+                        break;
+                case 1:
+                        return 1;
+                default:
+                        bsdPanel::exit_program();
+                        // If we get here there is a more serious problem :P
         }
 // If we get here, something is wrong :P
 return 0;
