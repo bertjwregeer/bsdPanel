@@ -1,17 +1,17 @@
 /**
-* DomainName class implementation. Performs basic checking
-* of domain names.
-*
-* @author Geoffrey Garside <ggarside@got-w00t.co.uk>
-* @author Jan-Willem Regeer <xistence@x-istence.com>
-* @version 0.1
-* @copyright Geoffrey Garside 2005
-* @copyright X-Istence.com 2005
-* @licence http://licence.got-w00t.co.uk/project Project
-*/
+ * DomainName class implementation. 
+ *
+ * @author Geoffrey Garside <ggarside@got-w00t.co.uk>
+ * @author Jan-Willem Regeer <xistence@x-istence.com>
+ * @version 0.1
+ * @copyright Geoffrey Garside 2005
+ * @copyright X-Istence.com 2005
+ * @license http://license.got-w00t.co.uk/project Project
+ */
 
 #include <iostream>
 #include <sstream>
+#include <ifstream>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -51,6 +51,11 @@ bool bsdPanelNet::DomainName::isValid(std::string const& address) {
     }
 }
 
+std::string bsdPanelNet::DomainName::hostmaster() {
+	std::string out = Òhostmaster.Ó;
+	out.append(domainName);
+	return out;
+}
 
 /** see page 143 of C++ for Java Programmers for another split function */
 std::vector<std::string> bsdPanelNet::DomainName::splitName(const std::string& address) {
@@ -65,8 +70,8 @@ std::vector<std::string> bsdPanelNet::DomainName::splitName(const std::string& a
 }
 
 /**
-* Properly ported to C++ now.
-*/
+ * Properly ported to C++ now.
+ */
 std::string bsdPanelNet::DomainName::checkAddress(const std::string& address) {
     std::vector<std::string> parts = splitName(address);
         
@@ -89,12 +94,37 @@ void bsdPanelNet::DomainName::destroyCheckVars() {
         delete domainCode;
 }
 
-// /*/TODO/*/ This is an expensive operation. Should be done once, after that it should be a global variable which can be used over and over again
+// /*/TODO*/ This is an expensive operation. Should be done once, after that it should be a global variable which can be used over and over again
 void bsdPanelNet::DomainName::initCheckVars() {
     if (domainCount < 1)
         initDomainCodes();
 }
+
+// OK, we now use a file to store the stuff :D
 void bsdPanelNet::DomainName::initDomainCodes() {
+    // Ok, we need to open the file with the codes and
+    // store them into the domainCode vector
+    std::ifstream codes;
+    codes.open("DomainCodes.dat");
+    
+    std::string code;
+    char nextcode[128];
+    
+    if (codes.is_open()) {
+        // file is open, we can now read the contents into the vector
+        while (!codes.eof()) {
+            codes >> nextcode;
+            code = nextcode;
+            domainCode.push_back(code);
+        }
+    } else {
+        // Error reading file, we need to decide how to deal with this
+    }
+    
+    codes.close();
+}
+
+/**
     domainCode.resize(257);
     
     // Country Level Domain Names
@@ -359,4 +389,4 @@ void bsdPanelNet::DomainName::initDomainCodes() {
     domainCode.push_back("name");
     domainCode.push_back("info");
     domainCode.push_back("museum");
-}
+*/

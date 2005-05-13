@@ -4,8 +4,7 @@
  * @author Geoffrey Garside <ggarside@got-w00t.co.uk>
  * @version 0.1
  * @copyright Geoffrey Garside 2005
- * @licence http://licence.got-w00t.co.uk/project Project
- * @Revision: $Id$ 
+ * @license http://license.got-w00t.co.uk/project Project
  */
 
 #include <iostream>

@@ -1,10 +1,15 @@
 /**
  * DomainName class
+ * This class is used to validate and store domain names. It is also designed
+ * to format and return certain domain name zone information in a standard
+ * way. Examples include the BiND hostmaster information.
+ * This class is core to the operation of the Record Type and is derived from
+ * the Address class type.
  *
  * @author Geoffrey Garside <ggarside@got-w00t.co.uk>
  * @version 0.1
  * @copyright Geoffrey Garside 2005
- * @licence http://licence.got-w00t.co.uk/project Project
+ * @license http://license.got-w00t.co.uk/project Project
  */
 #ifndef NET_DOMAINNAME_H
 #define NET_DOMAINNAME_H
@@ -35,6 +40,7 @@ namespace bsdPanelNet {
             ~DomainName();
             friend std::ostream& bsdPanelNet::operator << (std::ostream& os, const DomainName& domainname);
             virtual bool isValid(std::string const& address);
+            std::string hostmaster();
 
         protected:
             virtual std::string checkAddress(const std::string& address);
