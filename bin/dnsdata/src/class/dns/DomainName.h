@@ -25,7 +25,6 @@ namespace bsdPanelNet {
     	private:
             std::string name;
     	    static std::vector<std::string> domainCode;
-    	    static int domainCount;
 
             // Private member functions
             // /*/TODO/*/ Use one global with the following initialized. This takes up a ton of processing time otherwise
