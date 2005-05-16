@@ -18,11 +18,11 @@
 namespace bsdPanelNet {
     class Address {
     	protected:
-            const std::string delimiter;
+            const std::string deliniator;
             virtual std::string checkAddress(const std::string& address);
 
     	public:
-            Address() : delimiter(".") { }
+            Address() : deliniator(".") { }
             ~Address() { };
             virtual bool isValid(const std::string& address);
     };

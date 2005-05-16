@@ -1,5 +1,5 @@
 /**
- *
+ * So that we can throw exceptions 
  *
  *
  *

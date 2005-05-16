@@ -26,7 +26,7 @@ namespace bsdPanelDns {
             Record() : ttl(14400), fqdn() { };
             Record(int timeToLive) : ttl(timeToLive), fqdn() { };
             Record(bsdPanelNet::DomainName& name);
-            Record(bsdPanelnet::DomainName& name, int timeToLive);
+            Record(bsdPanelNet::DomainName& name, int timeToLive);
             Record(Record& record);
             virtual ~Record();
     };
