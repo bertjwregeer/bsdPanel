@@ -18,11 +18,13 @@
 namespace bsdPanelNet {
     class IpAddress : public bsdPanelNet::Address {
     	protected:
-            int octect[4];
+            unsigned int octet[4];
             virtual std::string checkAddress(const std::string& address);
 
     	public:
             IpAddress() : deliniator(".") { }
+            IpAddress(std::string& addr) { }
+            IpAddress(bsdPanelNet::IpAddress& addr) : octet(addr.octet) { }
             ~IpAddress() { };
             virtual bool isValid(const std::string& address);
     };

@@ -16,15 +16,18 @@
 #include <string>
 
 #include "Record.h"
+#include "../net/IpAddress.h"
 
 namespace bsdPanelDns {
     class Host : public bsdPanelDns::Record {
         protected:
-            bsdPanelNet::IpAddress ip;
+            bsdPanelNet::IpAddress * ip;
 
         public:
     	    Host();
-            Host(bsdPanelNet::IpAddress const& pIp);
+    	    Host(bsdPanelNet::DomainName& name, bsdPanelNet::IpAddress const& ipAddr);
+            Host(bsdPanelNet::DomainName& name, int timeToLive, bsdPanelNet::IpAddress const& ipAddr);
+            Host(std::string& name, int timeToLive, std::string& ipAddr);
             ~Host();
             friend std::ostream& operator << (std::ostream& os, const Host& host);
             //friend std::istream& operator>> (std::istream& is, Host& host);

@@ -16,7 +16,15 @@ bsdPanelDns::Record::Record(DomainName& name) : ttl(14400) {
     fqdn = new bsdPanelNet::DomainName(name);
 }
 
-bsdPanelDns::Record::Record(DomainName& name, int timeToLive) ttl(timeToLive) {
+bsdPanelDns::Record::Record(DomainName& name, int timeToLive) : ttl(timeToLive) {
+    fqdn = new bsdPanelNet::DomainName(name);
+}
+
+bsdPanelDns::Record::Record(std::string& name) : ttl(14400) {
+    fqdn = new bsdPanelNet::DomainName(name);
+}
+
+bsdPanelDns::Record::Record(std::string& name, int timeToLive) : ttl(timeToLive) {
     fqdn = new bsdPanelNet::DomainName(name);
 }
 

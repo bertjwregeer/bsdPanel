@@ -11,9 +11,11 @@
 #include <iostream>
 #include <string>
 
-namespace bsdPanel {
-    class OutputFormatter {
-        public:
-            static std::string convert(const std::string& str);
-    };
+#include "OutputFormatter.h"
+
+bsdPanel::OutputFormatter::convert(const std::string& str) {
+    // lets see if we cant split up the string into its tab segments
+    std::vector<std::string> string_bits;
+    
+    
 }

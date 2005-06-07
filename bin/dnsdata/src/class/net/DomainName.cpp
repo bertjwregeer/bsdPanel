@@ -34,7 +34,7 @@ bsdPanelNet::DomainName::DomainName(const std::string& domainName) {
 }
 
 bsdPanelNet::DomainName::~DomainName() {
-	// There is no desctructor needed yet
+	// There is no destructor needed yet
 }
 
 bool bsdPanelNet::DomainName::isValid(std::string const& address) {

@@ -16,6 +16,8 @@
 #include <iostream>
 #include <string>
 
+#include "../net/DomainName.h"
+
 namespace bsdPanelDns {
     class Record {
         protected:
@@ -27,6 +29,8 @@ namespace bsdPanelDns {
             Record(int timeToLive) : ttl(timeToLive), fqdn() { };
             Record(bsdPanelNet::DomainName& name);
             Record(bsdPanelNet::DomainName& name, int timeToLive);
+            Record(std::string& name);
+            Record(std::string& name, int timeToLive);
             Record(Record& record);
             virtual ~Record();
     };

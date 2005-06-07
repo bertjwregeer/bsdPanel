@@ -21,7 +21,8 @@ namespace bsdPanelDns {
     class Address : public bsdPanelDns::Host {
         public:
     	    Address();
-            Address(bsdPanelNet::IpAddress const& pIp);
+            Address(bsdPanelNet::DomainName& name, int timeToLive, bsdPanelNet::IpAddress const& pIp);
+            Address(std::string& name, int timeToLive, std::string& ip);
             ~Address();
             friend std::ostream& operator << (std::ostream& os, const Address& address);
             //friend std::istream& operator>> (std::istream& is, Address& address);
