@@ -11,25 +11,30 @@
  * @license http://license.got-w00t.co.uk/project Project
  */
 
-#ifndef EXCEPTION_H
-#define EXCEPTION_H
+#ifndef BSDPANEL_EXCEPTION_H
+#define BSDPANEL_EXCEPTION_H
 
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
-namespace bsdPanel {
-    class Exception {
-        protected:
-            std::string reason;
-
+namespace bsdPanel 
+{
+    class Exception 
+    {
         public:
-            Exception() : reason("Error") { }
-            Exception(std::string & why) : reason(why) { }
-            Exception(Exception & why) : reason(why.reason) { }
-            ~Exception();
-
-            void operator = (Exception & why) { reason = why.reason; }
-            operator std::string () { return reason; }
+            Exception();
+            Exception(const std::string &);
+            Exception(const char * const);
+            virtual ~Exception() { delete reason; reason = NULL; }
+            virtual void printStackTrace() const;
+            virtual void printError() const;
+            
+            friend std::ostream & operator << (std::ostream &, const Exception &);
+        
+        protected:
+            std::string * reason;
+            virtual const std::string & showError() const;
     };
 }
 #endif

@@ -11,8 +11,8 @@
  * @copyright Geoffrey Garside 2005
  * @license http://license.got-w00t.co.uk/project Project
  */
-#ifndef NET_DOMAINNAME_H
-#define NET_DOMAINNAME_H
+#ifndef BSDPANELNET_DOMAINNAME_H
+#define BSDPANELNET_DOMAINNAME_H
 
 #include <iostream>
 #include <string>
@@ -27,7 +27,6 @@ namespace bsdPanelNet {
     	    static std::vector<std::string> domainCode;
 
             // Private member functions
-            // /*/TODO/*/ Use one global with the following initialized. This takes up a ton of processing time otherwise
             void initCheckVars();
             void initDomainCodes();
             void destroyCheckVars();
@@ -37,9 +36,10 @@ namespace bsdPanelNet {
             DomainName(const std::string& domainName);
             DomainName(const DomainName& domainName) : name(domainName.name) { domainCount++; }
             ~DomainName();
-            friend std::ostream& bsdPanelNet::operator << (std::ostream& os, const DomainName& domainname);
+            friend std::ostream & operator << (std::ostream& os, const DomainName& domainname);
+            vritual std::string & output() const;
             virtual bool isValid(std::string const& address);
-            std::string hostmaster();
+            std::string hostmaster() const;
 
         protected:
             virtual std::string checkAddress(const std::string& address);
