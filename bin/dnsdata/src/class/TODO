@@ -1,1 +1,5 @@
 [done] Move the Domain name extensions out into a text file which is then read to build the domain codes vector
+[todo] refactor classes to updated plans
+[todo] move all classes from the bsdPanelNet and bsdPanelDns into bsdPanel::Net and bsdPanel::Dns respectively
+[todo] rederive specialised exception classes from the new exception definition
+[todo] create design documents for new class organization
