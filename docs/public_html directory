@@ -1,0 +1,16 @@
+Idea for public_html folder
+
+apache supports userdir
+so if user has more than one domain name then
+~username takes them to a public_html folder in which a php file runs and reads their domains folder and gets the names of their domains. From this it then produces a list of domains
+something like this.
+
+
+Here are your domains. Click one to view the contents of this site.
+
+
+Either that or when a new domain name is created a symlink is also created
+for example mysupaleetdomain.com is created
+
+domains/mysupaleetdomain.com/public_html is created
+public_html/mysupaleetdomain.com -> ../domains/mysupaleetdomain.com/public_html is also created
