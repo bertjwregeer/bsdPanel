@@ -31,7 +31,7 @@
  * $Id$
  */
 
-#include <Fork.h>
+#include <Fork/Fork.h>
 
 int bsdPanel::Fork::doFork () {
 

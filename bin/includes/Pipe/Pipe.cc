@@ -28,10 +28,9 @@
  * policies, either expressed  or implied, of X-Istence.com or the bsdPanel
  * project.
  *
- * $Id$
  */
 
-#include <Pipe.h>
+#include <Pipe/Pipe.h>
 
 int bsdPanel::Pipe::doPipe() {
 	if ( pipe(to) == -1) {
