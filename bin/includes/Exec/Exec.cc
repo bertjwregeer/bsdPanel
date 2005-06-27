@@ -31,7 +31,7 @@
  * $Id$
  */
  
-#include <Exec.h>
+#include <Exec/Exec.h>
  
 bsdPanel::Exec::Exec( std::vector<std::string> const & _args) : args(_args) {
         if (args.size() > MAXARG)
