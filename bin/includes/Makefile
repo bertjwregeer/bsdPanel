@@ -11,6 +11,7 @@ CLEANUP+= ${doinc}.clean
 BUILDALL+= ${doinc}/${doinc}.o
 .endfor
 
+all: $(BUILDALL)
+
 clean: $(CLEANUP)
 
-all: $(BUILDALL)
