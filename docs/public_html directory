@@ -14,3 +14,18 @@ for example mysupaleetdomain.com is created
 
 domains/mysupaleetdomain.com/public_html is created
 public_html/mysupaleetdomain.com -> ../domains/mysupaleetdomain.com/public_html is also created
+
+further structure ideas
+- domains/
+|- myfirstdomain.com/
+||- htpasswd/
+||- secure_html/
+| `- cgi-bin/
+||- public_html/
+| `- cgi-bin/
+`- myseconddomain.co.uk/
+ |- htpasswd/
+ |- secure_html/
+  `- cgi-bin/
+ |- public_html/
+  `- cgi-bin/
