@@ -1,0 +1,67 @@
+bsdPanel - Planning
+
+About:
+
+	bsdPanel is going to be a small free control panel, released under two licenses. It is going to be built for FreeBSD, and is going to be based around the FreeBSD ports tree for various reasons. This control panel was created as an alternative to cPanel (R). It will use the ports tree a lot, as this is the most valuable source of apps that FreeBSD has to offer, and its easy to use. Setup for bsdPanel will be done thru the ports collection itself as well, as this is most probably the easiest way. It will use various tools that are very reliable like qMail, apache and more. The tools were selected to be run on a heavy webserver, but in the mean time trying to keep down really heavy load. Trying to save resources is becoming a big factor, the more users you put on a server, the less resources are available. That is where there can become a problem, most servers run Apache and then exim and bind. Quite possible the most normal setup you could say. However, why run Exim when you could run qMail and have a faster, crash prone, and much more stable MTA that uses a lot less resources? Most of the time its the fact that qMail takes a lot of configuring, its different, and its to new for people.
+	In bsdPanel we are also looking for the quality programs, and the ones that have been around, and have had the better part. The ones that are secure, small and dont use up a lot of resources, and its configuring is not hard at all.
+
+
+
+1. Where bsdPanel will reside
+2. Current software/app requirements
+3. Features
+4. Other
+
+1.
+
+/usr/local/bsdpanel ----
+			\
+			D| - web    ----
+			 |		\
+			 |		D| - skins    --
+			 |		 |		\
+			 |		 |		D| - cache
+			 |		 |		D| - images
+			 |		 |		D| - xhtml 	
+			 |		D| - includes
+			D| - bin
+			D| - users -----
+			 | 		\
+			 |		F| - apache.conf
+			 | 		D| - username --
+			 | 				\
+			 |				D| - awstats
+			 |				F| - apache.conf
+			 |				F| - ftpusers.db
+			 |				F| - statrun
+			 |				F| - domain
+			 |				F| - subdomains
+			D| - cfg -------
+					\
+					F| - domains
+					F| - users
+					F| - expire
+					F| - plans
+					F| - 
+2.
+
+Apache 1.3.x OR Apache 2.x
+qMail 1.03
+vpopmail
+qMailAdmin
+spamassasin
+bincimap
+djbns DNS
+MySQL
+PostGreSQL
+
+3.
+
+Current features we are looking to include into this control panel:
+
+	a - DNS editing. Give the user control of his own domain's DNS and let him edit, this is a feature most control panels miss
+	b - Mail solution, create accounts, remove accounts, edit accounts. For the advanced users qMailAdmin will be available to play with.
+	c - Dynamic adding of sub-domains and entries to the httpd configuration file.
+	d - Dynamic management of FTP users, so you could offer some FTP space to a friend
+	e - Statistics created by awstats. For sub-domains and domains alike
+	f -  Limit bandwidth and disk space to certain subdomains, but only if you want to, if you elect to do it, it only has to be done for that subdomain, not all
