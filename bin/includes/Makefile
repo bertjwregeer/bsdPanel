@@ -1,5 +1,6 @@
-DIRS= Fork Pipe Exec
-CXXFLAGS = -I. -Wall
+DIRS= Fork Pipe Exec Parser
+OPTIMIZE ?= -O0
+CXXFLAGS = -I. -Wall ${OPTIMIZE}
 CLEANUP=
 BUILDALL=
 
