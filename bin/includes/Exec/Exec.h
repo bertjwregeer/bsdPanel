@@ -52,7 +52,6 @@ namespace bsdPanel {
                         typedef std::auto_ptr<Exec> Ptr;
                         Exec( std::vector<std::string> const & _args);
                         Exec( std::vector<std::string> const & _args, std::vector<std::string> const & _env);
-                        ~Exec();
                         int doExec();
                           
                 private:

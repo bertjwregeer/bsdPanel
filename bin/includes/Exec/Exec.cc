@@ -36,6 +36,8 @@
 bsdPanel::Exec::Exec( std::vector<std::string> const & _args) : args(_args) {
         if (args.size() > MAXARG)
                 throw bsdPanel::TooManyArgs();
+        if (args.size() == 0)
+                throw bsdPanel::NoArgs();
 }
 
 bsdPanel::Exec::Exec( std::vector<std::string> const & _args,  std::vector<std::string> const & _env) : args(_args), env(_env) {
@@ -43,12 +45,13 @@ bsdPanel::Exec::Exec( std::vector<std::string> const & _args,  std::vector<std::
                 throw bsdPanel::TooManyArgs();
         if (env.size() > MAXARG)
                 throw bsdPanel::TooManyEnv();
+        if (args.size() == 0)
+                throw bsdPanel::NoArgs();
 }
 
 int bsdPanel::Exec::doExec() {
-        char **argv;
-        char **envi;
-	std::string prog = args.at(0);
+        char **argv = 0;
+        char **envi = 0;
         
         if (args.size() > 0) {
                 argv = new char*[args.size()];
@@ -75,9 +78,9 @@ int bsdPanel::Exec::doExec() {
         switch(doPipe()) {
                 case 0:
                         if ( (args.size() > 0) && (env.empty()) )
-                                execv(prog.c_str(), argv);
+                                execv(argv[0], argv);
                         if ( (args.size() > 0) && (env.size() > 0) )
-                                execve(prog.c_str(), argv, envi);
+                                execve(argv[0], argv, envi);
                                                                              
                         _exit(-1);
                         break;
