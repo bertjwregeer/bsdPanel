@@ -33,7 +33,8 @@
 
 #ifndef BSDPANEL_PARSER
 #define BSDPANEL_PARSER
- 
+
+#include <iostream>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -87,7 +88,7 @@ namespace bsdPanel {
                         void parseMatch__ (std::string const & _match, std::string const & _cmts);
                         // Internal function to prepare for matching.
                         void prepareMatch__ ();
-                        std::string getString__ (std::string::iterator & _start, std::string::iterator & _end)
+                        std::string getString__ (std::string::iterator & _start, std::string::iterator & _end);
         };
 }
 

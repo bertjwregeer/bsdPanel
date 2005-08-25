@@ -169,13 +169,46 @@ void bsdPanel::Parser::prepareMatch__() {
                                 type_temp = new p_type();
                                 *(type_temp->type) = 4;
                         }
-                                
                         
                         (type_temp->text)->append(getString__(a, b));
                         
                 } 
         }               
 }
+
+std::string bsdPanel::Parser::getString__ (std::string::iterator & _start, std::string::iterator & _end) {
+        std::stringstream mystream; // Not to be confused with the one inside the other function
+        int ndone = 0;
+        
+        while ( _start != _end ) {
+                if ( all.find(*(_start)) != std::string::npos && ndone )
+                        // We got a match, it means the character exists in the string all!
+                        mystream << *(_start); // Inject character into the string stream
+                // No match on the standard string, check if the character is special case
+                
+                if ( *(_start) == '\\' ) {
+                        // We can just add the next character to the string stream, unless it is \w or \t
+                        switch ( (*(++_start)) ) {
+                                case 't':
+                                case 'w':
+                                        // Rewind the character stream by two
+                                        _start = _start - 2;
+                                        ndone = 1;
+                                        break;
+                                default:
+                                        mystream << *(_start);
+                                        break;
+                        }
+                }
+                
+                ++_start; // At this point we can hope the character has been added to the stream. I should note, that special characters like the pound symbol, or the euro symbol will just be skipped over, rewrite the engine if you want to make use of them. I feel it would be too much of a pain to add all the characters that are possible in the world, so we are gonna keep it to a simple alphabet. Check Parser.h for more  info about the string "all"              
+        }
+        
+        std::string done;
+        mystream >> done;
+        return done;
+}
+
 void bsdPanel::Parser::parseMatch__(std::string const & _match, std::string const & _cmts) {
         match = new std::string(_match);
         cmts = new std::string(_cmts);
@@ -189,7 +222,7 @@ void bsdPanel::Parser::parseMatch__(std::string const & _match, std::string cons
         for ( std::string::iterator a = match->begin(), b = match->end(); a!=b; ++a ) {
                 if ( spc == 0 && (*a) == '(' ) {
                         if ( anh != 0 )
-                                throw NestedMatch();
+                                throw bsdPanel::NestedMatch();
                         anh++;
                 }
                 if ( spc == 0 && (*a) == ')' )
@@ -197,7 +230,7 @@ void bsdPanel::Parser::parseMatch__(std::string const & _match, std::string cons
                         
                 if ( spc == 0 && (*a) == '[' ) {
                         if ( pnh != 0 )
-                                throw NestedMatch();
+                                throw bsdPanel::NestedMatch();
                         pnh++;
                 }
                 
@@ -205,10 +238,13 @@ void bsdPanel::Parser::parseMatch__(std::string const & _match, std::string cons
                         pnh--;
                 
                 if ( spc == 0 && (*a) == '\\' ) {
-                        if (spc == 1)
+                        if (spc == 1) {
                                 spc = 0;
-                        else
+                        }
+                        else {
                                 spc = 1;
+                                continue;
+                        }
                 }
                 
                 if ( spc == 1 ) {
@@ -224,19 +260,19 @@ void bsdPanel::Parser::parseMatch__(std::string const & _match, std::string cons
                                     spc = 0;
                                     break;
                             default:
-                                    throw FaultMatch();
+                                    throw bsdPanel::FaultMatch();
                         }
                 }
         }
         
         if (anh != 0)
-                throw FaultMatch();
+                throw bsdPanel::FaultMatch();
                 
         if (pnh != 0)
-                throw FaultMatch();
+                throw bsdPanel::FaultMatch();
         
         if (spc != 0)
-                throw FaultMatch(); 
+                throw bsdPanel::FaultMatch();
 }
 
 bsdPanel::Parser::p_type::p_type() {
