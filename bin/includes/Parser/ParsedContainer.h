@@ -28,7 +28,6 @@
  * policies, either expressed  or implied, of X-Istence.com or the bsdPanel
  * project.
  *
- * $Id$
  */
 
 #ifndef BSDPANEL_PARSERCONT
@@ -40,6 +39,7 @@ namespace bsdPParser {
         class ParsedContainer {
                 public:
                         virtual int add (std::vector<std::string> const & _parsed);
+			virtual ~ParsedContainer();
         };
 }
 
