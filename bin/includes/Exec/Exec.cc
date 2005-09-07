@@ -53,19 +53,18 @@ int bsdPanel::Exec::doExec() {
         char **argv = 0;
         char **envi = 0;
         
-        if (args.size() > 0) {
-                argv = new char*[args.size()];
-                int i = 0;
-                for (std::vector<std::string>::iterator a = args.begin(), b = args.end(); 
-                        a!=b; a++) {
-                        argv[i] = new char[(a)->length() + 1]; 
-                        strcpy(argv[i], (a)->c_str());
-                        i++;
-                }
+        argv = new char*[args.size() + 1];
+        int i = 0;
+        for (std::vector<std::string>::iterator a = args.begin(), b = args.end(); 
+                a!=b; a++) {
+                argv[i] = new char[(a)->length() + 1]; 
+                strcpy(argv[i], (a)->c_str());
+                i++;
         }
-        
+        argv[i] = static_cast<char *> (0);      
+
         if (env.size() > 0) {
-                envi = new char*[env.size()];
+                envi = new char*[env.size() + 1];
                 int i = 0;
                 for (std::vector<std::string>::iterator a = env.begin(), b = env.end(); 
                         a!=b; a++) {
@@ -73,13 +72,14 @@ int bsdPanel::Exec::doExec() {
                         strcpy(envi[i], (a)->c_str());
                         i++;
                 }
+                envi[i] = static_cast<char *> (0);
         }
         
         switch(doPipe()) {
                 case 0:
-                        if ( (args.size() > 0) && (env.empty()) )
+                        if ( argv && envi == 0 )
                                 execv(argv[0], argv);
-                        if ( (args.size() > 0) && (env.size() > 0) )
+                        if ( argv && envi )
                                 execve(argv[0], argv, envi);
                                                                              
                         _exit(-1);
