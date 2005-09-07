@@ -9,3 +9,5 @@ includes::
 
 clean:
 	rm -rf ForkPipeExectest
+	rm -rf Parsertest
+	rm -rf *.core
