@@ -209,7 +209,7 @@ std::string bsdPanel::Parser::getString__ (std::string::iterator & _start, std::
         return done;
 }
 
-void bsdPanel::Parser::parseMatch__(std::string const & _match, std::string const & _cmts) {
+inline void bsdPanel::Parser::parseMatch__(std::string const & _match, std::string const & _cmts) {
         match = new std::string(_match);
         cmts = new std::string(_cmts);
         
