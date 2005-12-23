@@ -40,7 +40,7 @@ namespace bsdPanel
         /**
          * Empty default constructor
          */
-        StartOfAuthority() : NameServer()
+        StartOfAuthority::StartOfAuthority() : NameServer()
         {
             soaAdmin    = new std::string(BSDPANEL_DNS_SOA_ADMIN);
             soaSerial   = makeSerial();
@@ -54,7 +54,7 @@ namespace bsdPanel
          * Copy constructor.
          * @param soa a StartOfAuthority record
          */
-        StartOfAuthority(const StartOfAuthority & rhs)
+        StartOfAuthority::StartOfAuthority(const StartOfAuthority & rhs)
         {
             name = new bsdPanel::Net::DomainName(rhs.getName());
             timeToLive = rhs.getTimeToLive();
@@ -76,20 +76,20 @@ namespace bsdPanel
          * Initializes the Record parent class
          * @param dname bsdPanel::Net::DomainName
          */
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname)
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname)
                     : NameServer(dname)
         {
             soaAdmin = new std::string(BSDPANEL_DNS_SOA_ADMIN);
         }
         
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl) : NameServer(dname, ttl)
         {
             soaAdmin = new std::string(BSDPANEL_DNS_SOA_ADMIN);
         }
         
         // DomainName, IpAddress constructors
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr)
                     : NameServer(dname, ip_addr)
         {
@@ -97,7 +97,7 @@ namespace bsdPanel
         }
         
         // dname, ip, serial
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial)
                     : NameServer(dname, ip_addr) , soaSerial(serial)
@@ -105,25 +105,25 @@ namespace bsdPanel
             soaAdmin = new std::string(BSDPANEL_DNS_SOA_ADMIN);
         }
         // dname, ip, serial, refresh
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr, 
                     const unsigned long serial,
                     const unsigned long refresh);
         // dname, ip, serial, refresh, retry
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr, 
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
         // dname, ip, serial, refresh, retry, expire
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry,
                     const unsigned long expire);
         // dname, ip, serial, refresh, retry, expire, cache
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh,
@@ -132,29 +132,29 @@ namespace bsdPanel
                     const unsigned long cache);
         
         // DomainName, TimeToLive, IpAddress constructors
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr);
         // dname, ttl, ip, serial
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial);
         // dname, ttl, ip, serial, refresh
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh);
         // dname, ttl, ip, serial, refresh, retry
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
         // dname, ttl, ip, serial, refresh, retry, expire
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial,
@@ -162,7 +162,7 @@ namespace bsdPanel
                     const unsigned long retry,
                     const unsigned long expire);
         // dname, ttl, ip, serial, refresh, retry, expire, cache
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial,
@@ -172,29 +172,29 @@ namespace bsdPanel
                     const unsigned long cache);
         
         // DomainName, IpAddress, NameServer constructors
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns);
         // dname, ip, nameserver, serial
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial);
         // dname, ip, nameserver, serial, refresh
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
         // dname, ip, nameserver, serial, refresh, retry
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
         // dname, ip, nameserver, serial, refresh, retry, expire
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
@@ -202,7 +202,7 @@ namespace bsdPanel
                     const unsigned long retry, 
                     const unsigned long expire);
         // dname, ip, nameserver, serial, refresh, retry, expire, cache
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
@@ -212,25 +212,25 @@ namespace bsdPanel
                     const unsigned long cache);
         
         // DomainName, TimeToLive, IpAddress, NameServer constructors
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns);
         // dname, ttl, ip, nameserver, serial
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial);
         // dname, ttl, ip, nameserver, serial, refresh
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
         // dname, ttl, ip, nameserver, serial, refresh, retry
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
@@ -238,7 +238,7 @@ namespace bsdPanel
                     const unsigned long refresh,
                     const unsigned long retry);
         // dname, ttl, ip, nameserver, serial, refresh, retry, expire
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
@@ -247,7 +247,7 @@ namespace bsdPanel
                     const unsigned long retry,
                     const unsigned long expire);
         // dname, ttl, ip, nameserver, serial, refresh, retry, expire, cache
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
@@ -258,37 +258,37 @@ namespace bsdPanel
                     const unsigned long cache);
                     
         // String based constructors
-        StartOfAuthority(const std::string & dname);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname);
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl);
         
         // domain name, ip address constructors
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr);
         // dname, ip, serial
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const unsigned long serial);
         // dname, ip, serial, refresh
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh);
         // dname, ip, serial, refresh, retry
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
         // dname, ip, serial, refresh, retry, expire
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry,
                     const unsigned long expire);
         // dname, ip, serial, refresh, retry, expire, cache
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh,
@@ -297,29 +297,29 @@ namespace bsdPanel
                     const unsigned long cache);
         
         // domain name, ttl, ip address constructors
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr);
         // dname, ttl, ip, serial
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const unsigned long serial);
         // dname, ttl, ip, serial, refresh
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh);
         // dname, ttl, ip, serial, refresh, retry
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
         // dname, ttl, ip, serial, refresh, retry, expire
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const unsigned long serial,
@@ -327,7 +327,7 @@ namespace bsdPanel
                     const unsigned long retry,
                     const unsigned long expire);
         // dname, ttl, ip, serial, refresh, retry, expire, cache
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const unsigned long serial,
@@ -337,29 +337,29 @@ namespace bsdPanel
                     const unsigned long cache);
         
         // domain name, ip address, nameserver constructors
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const std::string & ns);
         // dname, ip, nameserver, serial
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial);
         // dname, ip, nameserver, serial, refresh
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
         // dname, ip, nameserver, serial, refresh, retry
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
         // dname, ip, nameserver, serial, refresh, retry, expire
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
@@ -367,7 +367,7 @@ namespace bsdPanel
                     const unsigned long retry,
                     const unsigned long expire);
         // dname, ip, nameserver, serial, refresh, retry, expire, cache
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
@@ -377,25 +377,25 @@ namespace bsdPanel
                     const unsigned long cache);
         
         // domain name, ttl, ip address, nameserver constructors
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const std::string & ns);
         // dname, ttl, ip, nameserver, serial
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial);
         // dname, ttl, ip, nameserver, serial, refresh
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
         // dname, ttl, ip, nameserver, serial, refresh, retry
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const std::string & ns,
@@ -403,7 +403,7 @@ namespace bsdPanel
                     const unsigned long refresh,
                     const unsigned long retry);
         // dname, ttl, ip, nameserver, serial, refresh, retry, expire
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const std::string & ns,
@@ -412,7 +412,7 @@ namespace bsdPanel
                     const unsigned long retry, 
                     const unsigned long expire);
         // dname, ttl, ip, nameserver, serial, refresh, retry, expire, cache
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const unsigned long ttl,
                     const std::string & ip_addr,
                     const std::string & ns,
@@ -423,32 +423,32 @@ namespace bsdPanel
                     const unsigned long cache);
         
         // Constructors that cover the mixed parameters
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry,
                     const unsigned long expire);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
@@ -457,32 +457,32 @@ namespace bsdPanel
                     const unsigned long expire,
                     const unsigned long cache);
         
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry,
                     const unsigned long expire);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
@@ -491,32 +491,32 @@ namespace bsdPanel
                     const unsigned long expire,
                     const unsigned long cache);
         
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry,
                     const unsigned long expire);
-        StartOfAuthority(const std::string & dname,
+        StartOfAuthority::StartOfAuthority(const std::string & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
@@ -525,32 +525,32 @@ namespace bsdPanel
                     const unsigned long expire,
                     const unsigned long cache);
         
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry,
                     const unsigned long expire);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const bsdPanel::Net::DomainName & ns,
                     const unsigned long serial,
@@ -559,32 +559,32 @@ namespace bsdPanel
                     const unsigned long expire,
                     const unsigned long cache);
         
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const std::string & ns);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry,
                     const unsigned long expire);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const std::string & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
@@ -593,32 +593,32 @@ namespace bsdPanel
                     const unsigned long expire,
                     const unsigned long cache);
         
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
                     const unsigned long refresh,
                     const unsigned long retry,
                     const unsigned long expire);
-        StartOfAuthority(const bsdPanel::Net::DomainName & dname,
+        StartOfAuthority::StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const std::string & ns,
                     const unsigned long serial,
