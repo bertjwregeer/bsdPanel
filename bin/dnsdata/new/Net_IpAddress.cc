@@ -14,7 +14,7 @@ namespace bsdPanel
     namespace Net
     {
         // class IpAddress functions
-        IpAddress::IpAddress()
+        IpAddress::IpAddress() : Address()
         {
             address = new std::vector<unsigned short int>;
             try
@@ -34,11 +34,17 @@ namespace bsdPanel
         
         IpAddress::IpAddress(const IpAddress & ip_addr)
         {
+            delim = ip_addr.getDelim();
             address = new std::vector<unsigned short int>;
             createAddress(ip_addr.getAddress());
             
             if (!isValid())
                 throw IpAddressException(IpAddressException::INVALID_ADDRESS);
+        }
+        
+        IpAddress::~IpAddress()
+        {
+            delete address;
         }
         
         bool IpAddress::isValid() const

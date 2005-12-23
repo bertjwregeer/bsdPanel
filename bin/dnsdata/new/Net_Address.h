@@ -28,6 +28,7 @@ namespace bsdPanel
                 
             protected:
                 virtual void output(std::ostream &) const;
+                virtual char getDelim() const;
                 char delim;
         };
     } // namespace Net

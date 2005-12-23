@@ -56,6 +56,11 @@ namespace bsdPanel
             os << "Address Output - This should be overloaded for the other types";
         }
         
+        char Address::getDelim() const
+        {
+            return delim;
+        }
+        
         std::vector<std::string> & Address::split_string(const std::string & string, const char & delim)
         {
             // break string into pieces by the delimiter

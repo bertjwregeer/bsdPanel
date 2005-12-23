@@ -25,7 +25,9 @@ namespace bsdPanel
             
             protected:
                 virtual void output(std::ostream &) const;
+                virtual std::string & getName() const;
                 std::string * name;
+                static std::vector<std::string> * domain_code;
         };
     } // namespace Net
 } // namespace bsdPanel
