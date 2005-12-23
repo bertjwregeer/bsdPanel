@@ -37,7 +37,7 @@ namespace bsdPanelNet {
             DomainName(const DomainName& domainName) : name(domainName.name) { domainCount++; }
             ~DomainName();
             friend std::ostream & operator << (std::ostream& os, const DomainName& domainname);
-            vritual std::string & output() const;
+            virtual std::string & output() const;
             virtual bool isValid(std::string const& address);
             std::string hostmaster() const;
 
