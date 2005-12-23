@@ -1,0 +1,6 @@
+-c indicates that the class or file has been compiled with g++ -c <filename.cpp>
+
+
+[-c] Net::Address
+[-c] Net::IpAddressException
+[-c] Net::IpAddress
