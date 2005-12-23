@@ -71,7 +71,7 @@ namespace bsdPanel
             protected:
                 virtual void output(std::ostream &) const;
                 virtual bsdPanel::Net::IpAddress & getAddress() const;
-                bsdPanel::Net::IpAddress ipAddress;
+                bsdPanel::Net::IpAddress *ipAddress;
         };
     } // end namespace Dns
 } // end namespace bsdPanel

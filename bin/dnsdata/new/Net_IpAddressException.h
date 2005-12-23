@@ -1,3 +1,12 @@
+/**
+ * Ip Address Exception type
+ *
+ * @author Geoffrey Garside <ggarside@got-w00t.co.uk>
+ * @version 0.1
+ * @copyright Geoffrey Garside 2005
+ * @license http://license.got-w00t.co.uk/project Project
+ */
+
 #ifndef BSDPANEL_NET_IPADDRESSEXCEPTION_H
 #define BSDPANEL_NET_IPADDRESSEXCEPTION_H
 

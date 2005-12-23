@@ -118,7 +118,7 @@ namespace bsdPanel
         
         bsdPanel::Net::DomainName & Record::getName() const
         {
-            return name;
+            return (*name);
         }
         
         unsigned long Record::getTimeToLive() const

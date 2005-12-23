@@ -64,7 +64,7 @@ namespace bsdPanel
                 virtual void output(std::ostream &) const;
                 virtual bsdPanel::Net::DomainName & getName() const;
                 virtual unsigned long getTimeToLive() const;
-                bsdPanel::Net::DomainName name;
+                bsdPanel::Net::DomainName *name;
                 unsigned long timeToLive;    
         };
     } // end namespace Dns

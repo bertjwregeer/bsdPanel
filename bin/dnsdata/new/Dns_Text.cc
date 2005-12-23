@@ -118,7 +118,7 @@ namespace bsdPanel
         
         std::string & Text::getContent() const
         {
-            return content;
+            return (*content);
         }
     } // end namespace Dns
 } // end namespace bsdPanel

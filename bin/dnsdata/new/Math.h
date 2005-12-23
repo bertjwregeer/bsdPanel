@@ -1,8 +1,10 @@
 #ifndef BSDPANEL_MATH_H
 #define BSDPANEL_MATH_H
 
-namespace bsdPanel {
-    namespace Math {
+namespace bsdPanel 
+{
+    namespace Math 
+    {
         int pow(int x, int y)
         {
             int ans = 1;

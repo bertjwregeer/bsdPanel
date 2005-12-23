@@ -25,6 +25,10 @@
 #ifndef BSDPANEL_DNS_STARTOFAUTHORITY_H
 #define BSDPANEL_DNS_STARTOFAUTHORITY_H
 
+#ifndef STARTOFAUTHORITY_HOSTMASTER
+#define STARTOFAUTHORITY_HOSTMASTER "hostmaster"
+#endif
+
 // Standard Library Includes
 #include <iostream>
 #include <string>
@@ -1053,7 +1057,7 @@ namespace bsdPanel
                 virtual unsigned long getExpire() const;
                 virtual unsigned long getCache() const;
                 virtual unsigned long makeSerial() const;
-                std::string soaAdmin;
+                std::string *soaAdmin;
                 unsigned long soaSerial;
                 unsigned long soaRefresh;
                 unsigned long soaRetry;

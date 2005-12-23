@@ -95,7 +95,7 @@ namespace bsdPanel
         
         bsdPanel::Net::IpAddress & Host::getAddress() const
         {
-            return ipAddress;
+            return (*ipAddress);
         }
     } // end namespace Dns
 } // end namespace bsdPanel

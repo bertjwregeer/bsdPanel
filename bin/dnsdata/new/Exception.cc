@@ -49,7 +49,7 @@ namespace bsdPanel {
     
     const std::string & Exception::showError() const
     {
-        return *reason;
+        return (*reason);
     }
     
     void Exception::setReason(const std::string & why)

@@ -118,7 +118,7 @@ namespace bsdPanel
         
         bsdPanel::Net::DomainName & CName::getMapping() const
         {
-            return mapping;
+            return *mapping;
         }
     } // end namespace Dns
 } // end namespace bsdPanel

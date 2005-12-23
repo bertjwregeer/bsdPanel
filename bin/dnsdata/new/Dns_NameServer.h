@@ -87,8 +87,8 @@ namespace bsdPanel
                 virtual void output(std::ostream &) const;
                 virtual bsdPanel::Net::IpAddress & getAddress() const;
                 virtual bsdPanel::Net::DomainName & getNSName() const;
-                bsdPanel::Net::IpAddress ipAddress;
-                bsdPanel::Net::DomainName nameserver;
+                bsdPanel::Net::IpAddress *ipAddress;
+                bsdPanel::Net::DomainName *nameserver;
         };
     } // end namespace Dns
 } // end namespace bsdPanel

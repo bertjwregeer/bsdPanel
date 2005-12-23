@@ -27,7 +27,7 @@
  *  that it wants the record to be created with.
  */
 
-const std::string BSDPANEL_DNS_SOA_ADMIN = "hostmaster";
+const std::string BSDPANEL_DNS_SOA_ADMIN = STARTOFAUTHORITY_HOSTMASTER;     //< STARTOFAUTHORITY_HOSTMASTER is defined in the class header file
 const int BSDPANEL_DNS_SOA_REFRESH  = 7200;     // 2 hours
 const int BSDPANEL_DNS_SOA_RETRY    = 3600;     // 1 hour
 const int BSDPANEL_DNS_SOA_EXPIRE   = 604800;   // 1 week
@@ -42,7 +42,7 @@ namespace bsdPanel
          */
         StartOfAuthority() : NameServer()
         {
-            soaAdmin    = BSDPANEL_DNS_SOA_ADMIN;
+            soaAdmin    = new std::string(BSDPANEL_DNS_SOA_ADMIN);
             soaSerial   = makeSerial();
             soaRefresh  = BSDPANEL_DNS_SOA_REFRESH;
             soaRetry    = BSDPANEL_DNS_SOA_RETRY;
@@ -62,7 +62,7 @@ namespace bsdPanel
             nameserver = new bsdPanel::Net::DomainName(rhs.getNSName());
             
             // Now for this classes fields
-            soaAdmin    = rhs.getSoaAdmin();
+            soaAdmin    = new std::string(rhs.getSoaAdmin());
             soaSerial   = rhs.getSerial();
             soaRefresh  = rhs.getRefresh();
             soaRetry    = rhs.getRetry();
@@ -78,24 +78,32 @@ namespace bsdPanel
          */
         StartOfAuthority(const bsdPanel::Net::DomainName & dname)
                     : NameServer(dname)
-        { }
+        {
+            soaAdmin = new std::string(BSDPANEL_DNS_SOA_ADMIN);
+        }
         
         StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const unsigned long ttl) : NameServer(dname, ttl)
-        { }
+        {
+            soaAdmin = new std::string(BSDPANEL_DNS_SOA_ADMIN);
+        }
         
         // DomainName, IpAddress constructors
         StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr)
                     : NameServer(dname, ip_addr)
-        { }
+        {
+            soaAdmin = new std::string(BSDPANEL_DNS_SOA_ADMIN);
+        }
         
         // dname, ip, serial
         StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr,
                     const unsigned long serial)
                     : NameServer(dname, ip_addr) , soaSerial(serial)
-        { }
+        {
+            soaAdmin = new std::string(BSDPANEL_DNS_SOA_ADMIN);
+        }
         // dname, ip, serial, refresh
         StartOfAuthority(const bsdPanel::Net::DomainName & dname,
                     const bsdPanel::Net::IpAddress & ip_addr, 

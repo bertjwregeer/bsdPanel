@@ -258,12 +258,12 @@ namespace bsdPanel
         
         bsdPanel::Net::IpAddress & NameServer::getAddress() const
         {
-            return ipAddress;
+            return (*ipAddress);
         }
         
         bsdPanel::Net::DomainName & NameServer::getNSName() const
         {
-            return nameserver;
+            return (*nameserver);
         }
     } // end namespace Dns
 } // end namespace bsdPanel

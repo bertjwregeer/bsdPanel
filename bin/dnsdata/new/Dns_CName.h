@@ -70,7 +70,7 @@ namespace bsdPanel
             protected:
                 virtual void output(std::ostream &) const;
                 virtual bsdPanel::Net::DomainName & getMapping() const;
-                bsdPanel::Net::DomainName mapping;
+                bsdPanel::Net::DomainName *mapping;
         };
     } // end namespace Dns
 } // end namespace bsdPanel

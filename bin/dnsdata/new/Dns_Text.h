@@ -70,7 +70,7 @@ namespace bsdPanel
             protected:
                 virtual void output(std::ostream &) const;
                 virtual std::string & getContent() const;
-                std::string content;
+                std::string *content;
         };
     } // end namespace Dns
 } // end namespace bsdPanel
