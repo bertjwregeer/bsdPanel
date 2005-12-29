@@ -1,5 +1,5 @@
 /**
- * Ip Address Exception type
+ * Domain Name Exception type
  *
  * @author Geoffrey Garside <ggarside@got-w00t.co.uk>
  * @version 0.1
