@@ -64,6 +64,7 @@ namespace bsdPanel
             } else {
                 // Error reading file, we need to decide how to deal with this
                 // Throw an exception :P
+                throw DomainNameException(DomainNameException.LOAD_DOMAIN_CODE_ERROR);
             }
             
             codes.close();
