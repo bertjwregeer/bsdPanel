@@ -38,9 +38,19 @@ namespace bsdPanel
         bool DomainName::isValid() const
         {
             bool check = false;
-            std::vector<std::string> parts = split_string(name, delim);
+            std::vector<std::string>::iterator code =
+                find (domain_code->begin(), domain_code->end(), suffix());
+            
+            if ( code != domain_code->end() )
+                check = true;
             
             return check;
+        }
+        
+        std::string DomainName::suffix() const
+        {
+            int pos = name->rfind(delim, name->length());
+            return (name->substr(pos, name->length()));
         }
         
         void DomainName::load_domain_codes()

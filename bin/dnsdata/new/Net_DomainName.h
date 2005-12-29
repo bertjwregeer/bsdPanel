@@ -27,6 +27,7 @@ namespace bsdPanel
                 virtual void output(std::ostream &) const;
                 virtual std::string & getName() const;
                 void load_domain_codes();
+                std::string suffix() const;
                 std::string * name;
                 static std::vector<std::string> * domain_code;
         };
