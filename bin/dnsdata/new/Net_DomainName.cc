@@ -35,15 +35,15 @@ namespace bsdPanel
             delete name;
         }
         
-        bool isValid() const
+        bool DomainName::isValid() const
         {
             bool check = false;
-            std::vector<std::string> * parts = split_string(name, delim);
+            std::vector<std::string> parts = split_string(name, delim);
             
             return check;
         }
         
-        void load_domain_codes()
+        void DomainName::load_domain_codes()
         {
             domain_code = new std::vector<std::string>;
             
