@@ -31,6 +31,7 @@ namespace bsdPanel
                 // Error Codes
                 static const int MEMORY_ALLOCATION = 400;
                 static const int INVALID_ADDRESS = 401;
+                static const int LOAD_DOMAIN_CODE_ERROR = 402;
         };
     } // namespace Net
 } // namespace bsdPanel

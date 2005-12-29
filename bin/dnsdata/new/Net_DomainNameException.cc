@@ -26,6 +26,10 @@ namespace bsdPanel
             {
                 setReason("Address is not valid");
             }
+            else if (e == LOAD_DOMAIN_CODE_ERROR)
+            {
+                setReason("Error loading domain codes from file");
+            }
         }
     } // namespace Net
 } // namespace bsdPanel
