@@ -87,7 +87,7 @@ namespace bsdPanel
             
             try
             {
-                for (int i = 0; i < addr.size(); i++)
+                for (std::size_t i = 0; i < addr.size(); i++)
                 {
                     address->push_back(addr[i]);
                 }
@@ -107,7 +107,7 @@ namespace bsdPanel
             
             try
             {
-                for (int i = 0; i < addr.size(); i++)
+                for (std::size_t i = 0; i < addr.size(); i++)
                 {
                     address->push_back(addr[i]);
                 }
@@ -141,7 +141,7 @@ namespace bsdPanel
         std::vector<int> & IpAddress::string2int(const std::vector<std::string> & ipaddr)
         {
             std::vector<int> * int_part = new std::vector<int>;
-            for (int i = 0; i < ipaddr.size(); i++)
+            for (std::size_t i = 0; i < ipaddr.size(); i++)
             {
                 // get each string portion and convert it to a an integer
                 std::string part = ipaddr[i];
@@ -150,7 +150,7 @@ namespace bsdPanel
                 // We now have the numbers in reverse order so we
                 // can pull them off, multiply them by 10*index and add them
                 int number = 0;
-                for (int i = 0; i < part.size(); i++)
+                for (std::size_t i = 0; i < part.size(); i++)
                 {
                     number += (part.at(i) - 48) * bsdPanel::Math::pow(10, i);
                 }
@@ -161,14 +161,14 @@ namespace bsdPanel
         
         void IpAddress::output(std::ostream & os) const
         {
-            for (int i = 0; i < address->size() - 1; i++)
+            for (std::size_t i = 0; i < address->size() - 1; i++)
             {
                 os << address->at(i) << delim;
             }
             os << address->at(address->size() - 1);
         }
         
-        unsigned short int & IpAddress::operator[](int offset)
+        unsigned short int & IpAddress::operator[](std::size_t offset)
         {
             if (address->size() < offset)
                 throw IpAddressException(IpAddressException::OUT_OF_BOUNDS);
@@ -176,7 +176,7 @@ namespace bsdPanel
                 return address->at(offset);
         }
         
-        unsigned short int IpAddress::operator[](int offset) const
+        unsigned short int IpAddress::operator[](std::size_t offset) const
         {
             if (address->size() < offset)
                 throw IpAddressException(IpAddressException::OUT_OF_BOUNDS);
@@ -196,7 +196,7 @@ namespace bsdPanel
                 return false;
             
             std::vector<unsigned short int> rhs_address = rhs.getAddress();
-            for (int i = 0; i < address->size(); i++)
+            for (std::size_t i = 0; i < address->size(); i++)
             {
                 if (rhs_address.at(i) == address->at(i))
                     retval = true;

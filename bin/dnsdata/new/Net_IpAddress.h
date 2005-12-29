@@ -21,8 +21,8 @@ namespace bsdPanel
                 virtual bool isValid() const;
                 virtual IpAddress & operator=(const IpAddress &);
                 virtual bool operator==(const IpAddress &);
-                virtual unsigned short int & operator[](int);
-                virtual unsigned short int operator[](int) const;
+                virtual unsigned short int & operator[](std::size_t);
+                virtual unsigned short int operator[](std::size_t) const;
                 virtual std::string & asString() const;
             
             protected:
