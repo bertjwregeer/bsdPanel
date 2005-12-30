@@ -68,7 +68,7 @@ namespace bsdPanel
                 //friend std::istream & operator>>(std::istream &, CName &);
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual bsdPanel::Net::DomainName & getMapping() const;
                 bsdPanel::Net::DomainName *mapping;
         };

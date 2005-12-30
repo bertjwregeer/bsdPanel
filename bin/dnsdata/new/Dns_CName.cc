@@ -29,7 +29,7 @@ namespace bsdPanel
         {
             name = new bsdPanel::Net::DomainName(rhs.getName());
             timeToLive = rhs.getTimeToLive();
-            mapping = new rhs.getMapping();
+            mapping = new bsdPanel::Net::DomainName(rhs.getMapping());
         }
         
         CName::CName(const bsdPanel::Net::DomainName & dname) : Record(dname)
@@ -83,7 +83,7 @@ namespace bsdPanel
         
         bool CName::isValid() const
         {
-            if (name.isValid() && mapping.isValid())
+            if (name->isValid() && mapping->isValid())
                 return true;
             else
                 return false;
@@ -103,17 +103,18 @@ namespace bsdPanel
         
         bool CName::operator==(const CName & rhs) const
         {
-            if (name == rhs.getName() &&
-                timeToLive == rhs.getTimeToLive &&
-                mapping == rhs.getMapping())
+            if (*name == rhs.getName() &&
+                timeToLive == rhs.getTimeToLive() &&
+                *mapping == rhs.getMapping())
                 return true;
             else
                 return false;
         }
         
-        void CName::output(std::ostream & os) const
+        std::ostream & CName::output(std::ostream & os) const
         {
             os << name << ":" << timeToLive << ":" << mapping;
+            return os;
         }
         
         bsdPanel::Net::DomainName & CName::getMapping() const
