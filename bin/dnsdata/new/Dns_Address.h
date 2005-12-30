@@ -55,8 +55,10 @@ namespace bsdPanel
                 Address(const bsdPanel::Net::DomainName &);
                 Address(const bsdPanel::Net::DomainName &, const unsigned long);
                 Address(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &);
+                Address(const bsdPanel::Net::DomainName &, const std::string &);
                 Address(const bsdPanel::Net::DomainName &, const unsigned long,
                         const bsdPanel::Net::IpAddress &);
+                Address(const bsdPanel::Net::DomainName &, const unsigned long, const std::string &);
                 Address(const std::string &);
                 Address(const std::string &, const unsigned long);
                 Address(const std::string &, const bsdPanel::Net::IpAddress &);
@@ -73,7 +75,7 @@ namespace bsdPanel
                 //friend std::istream & operator>>(std::istream &, Address &);
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
         };
     } // end namespace Dns
 } // end namespace bsdPanel
