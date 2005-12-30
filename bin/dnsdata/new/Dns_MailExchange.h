@@ -58,22 +58,23 @@ namespace bsdPanel
                 MailExchange(const bsdPanel::Net::DomainName &);
                 MailExchange(const bsdPanel::Net::DomainName &, const unsigned long);
                 MailExchange(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &);
-                MailExchange(const bsdPanel::Net::DomainName &, const unsigned long,
-                                const bsdPanel::Net::IpAddress &);
-                MailExchange(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &,
-                                const unsigned int);
-                MailExchange(const bsdPanel::Net::DomainName &, const unsigned long,
-                                const bsdPanel::Net::IpAddress & const unsigned int);
+                MailExchange(const bsdPanel::Net::DomainName &, const std::string &);
+                MailExchange(const bsdPanel::Net::DomainName &, const unsigned long, const bsdPanel::Net::IpAddress &);
+                MailExchange(const bsdPanel::Net::DomainName &, const unsigned long, const std::string &);
+                MailExchange(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &, const unsigned int);
+                MailExchange(const bsdPanel::Net::DomainName &, const std::string &, const unsigned int);
+                MailExchange(const bsdPanel::Net::DomainName &, const unsigned long, const bsdPanel::Net::IpAddress &, const unsigned int);
+                MailExchange(const bsdPanel::Net::DomainName &, const unsigned long, const std::string &, const unsigned int);
                 MailExchange(const std::string &);
                 MailExchange(const std::string &, const unsigned long);
                 MailExchange(const std::string &, const bsdPanel::Net::IpAddress &);
-                MailExchange(const std::string &, const unsigned long,
-                                const bsdPanel::Net::IpAddress &);
                 MailExchange(const std::string &, const std::string &);
+                MailExchange(const std::string &, const unsigned long, const bsdPanel::Net::IpAddress &);
                 MailExchange(const std::string &, const unsigned long, const std::string &);
+                MailExchange(const std::string &, const bsdPanel::Net::IpAddress &, const unsigned int);
                 MailExchange(const std::string &, const std::string &, const unsigned int);
-                MailExchange(const std::string &, const unsigned long, const std::string &
-                                const unsigned int);
+                MailExchange(const std::string &, const unsigned long, const bsdPanel::Net::IpAddress &, const unsigned int);
+                MailExchange(const std::string &, const unsigned long, const std::string &, const unsigned int);
                 virtual ~MailExchange();
                 virtual bool isValid() const;
                 virtual MailExchange & operator=(const MailExchange &);
@@ -82,7 +83,7 @@ namespace bsdPanel
                 //friend std::istream & operator>>(std::istream &, MailExchange &);
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual unsigned int getDistance() const;
                 unsigned int distance;
         };

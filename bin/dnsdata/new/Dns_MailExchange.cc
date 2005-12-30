@@ -32,7 +32,7 @@ namespace bsdPanel
         MailExchange::MailExchange(const MailExchange & rhs)
         {
             name = new bsdPanel::Net::DomainName(rhs.getName());
-            ttl = rhs.getTimeToLive();
+            timeToLive = rhs.getTimeToLive();
             ipAddress = new bsdPanel::Net::IpAddress(rhs.getAddress());
             distance = rhs.getDistance();
         }
@@ -44,7 +44,7 @@ namespace bsdPanel
         }
         
         MailExchange::MailExchange(const bsdPanel::Net::DomainName & dname, 
-                                    const long ttl) : Host(dname, ttl), distance(10)
+                                    const unsigned long ttl) : Host(dname, ttl), distance(10)
         {
             // empty constructor, uses parent
         }
@@ -55,9 +55,23 @@ namespace bsdPanel
         {
             // empty constructor, uses parent
         }
+        
+        MailExchange::MailExchange(const bsdPanel::Net::DomainName & dname, 
+                            const std::string & ip_addr)
+                            : Host(dname, ip_addr), distance(10)
+        {
+            // empty constructor, uses parent
+        }
                 
-        MailExchange::MailExchange(const bsdPanel::Net::DomainName & dname, const long ttl,
+        MailExchange::MailExchange(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
                             const bsdPanel::Net::IpAddress & ip_addr) 
+                            : Host(dname, ttl, ip_addr), distance(10)
+        {
+            // empty constructor, uses parent
+        }
+        
+        MailExchange::MailExchange(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
+                            const std::string & ip_addr) 
                             : Host(dname, ttl, ip_addr), distance(10)
         {
             // empty constructor, uses parent
@@ -69,6 +83,14 @@ namespace bsdPanel
         {
             // empty constructor, uses parent
         }
+        
+        MailExchange::MailExchange(const bsdPanel::Net::DomainName & dname,
+                            const std::string & ip_addr, const unsigned int dist)
+                            : Host(dname, ip_addr), distance(dist)
+        {
+            // empty constructor, uses parent
+        }
+        
         MailExchange::MailExchange(const bsdPanel::Net::DomainName & dname,
                                 const unsigned long ttl, const bsdPanel::Net::IpAddress & ip_addr,
                                 const unsigned int dist) : Host(dname, ttl, ip_addr), distance(dist)
@@ -76,12 +98,20 @@ namespace bsdPanel
             // empty constructor, uses parent
         }
         
+        MailExchange::MailExchange(const bsdPanel::Net::DomainName & dname,
+                                const unsigned long ttl, const std::string & ip_addr,
+                                const unsigned int dist) : Host(dname, ttl, ip_addr), distance(dist)
+        {
+            // empty constructor, uses parent
+        }
+        
+        
         MailExchange::MailExchange(const std::string & dname) : Host(dname), distance(10)
         {
             // empty constructor, uses parent
         }
         
-        MailExchange::MailExchange(const std::string & dname, const long ttl)
+        MailExchange::MailExchange(const std::string & dname, const unsigned long ttl)
                                 : Host(dname, ttl), distance(10)
         {
             // empty constructor, uses parent
@@ -94,21 +124,28 @@ namespace bsdPanel
             // empty constructor, uses parent
         }
         
-        MailExchange::MailExchange(const std::string & dname, const long ttl,
+        MailExchange::MailExchange(const std::string & dname,
+                            const std::string & ip_addr)
+                            : Host(dname, ip_addr), distance(10)
+        {
+            // empty constructor, uses parent
+        }
+        
+        MailExchange::MailExchange(const std::string & dname, const unsigned long ttl,
                             const bsdPanel::Net::IpAddress & ip_addr)
                             : Host(dname, ttl, ip_addr), distance(10)
         {
             // empty constructor, uses parent
         }
         
-        MailExchange::MailExchange(const std::string & dname, 
-                            const std::string & ip_addr) : Host(dname, ip_addr), distance(10)
+        MailExchange::MailExchange(const std::string & dname, const unsigned long ttl,
+                            const std::string & ip_addr) : Host(dname, ttl, ip_addr), distance(10)
         {
             // empty constructor, uses parent
         }
         
-        MailExchange::MailExchange(const std::string & dname, const long ttl,
-                            const std::string & ip_addr) : Host(dname, ttl, ip_addr), distance(10)
+        MailExchange::MailExchange(const std::string & dname, const bsdPanel::Net::IpAddress & ip_addr,
+                            const unsigned int dist) : Host(dname, ip_addr), distance(dist)
         {
             // empty constructor, uses parent
         }
@@ -118,6 +155,14 @@ namespace bsdPanel
         {
             // empty constructor, uses parent
         }
+        
+        MailExchange::MailExchange(const std::string & dname, const unsigned long ttl,
+                            const bsdPanel::Net::IpAddress & ip_addr, const unsigned int dist)
+                            : Host(dname, ttl, ip_addr), distance(dist)
+        {
+            // empty constructor, uses parent
+        }
+        
         MailExchange::MailExchange(const std::string & dname, const unsigned long ttl,
                             const std::string & ip_addr, const unsigned int dist)
                             : Host(dname, ttl, ip_addr), distance(dist)
@@ -132,7 +177,7 @@ namespace bsdPanel
         
         bool MailExchange::isValid() const
         {
-            if (name.isValid() && ipAddress.isValid())
+            if (name->isValid() && ipAddress->isValid())
                 return true;
             else
                 return false;
@@ -142,7 +187,10 @@ namespace bsdPanel
         {
             if (this == &rhs)
                 return *this;
-                
+            
+            if (name != NULL) delete name;
+            if (ipAddress != NULL) delete ipAddress;
+            
             name = new bsdPanel::Net::DomainName(rhs.getName());
             timeToLive = rhs.getTimeToLive();
             ipAddress = new bsdPanel::Net::IpAddress(rhs.getAddress());
@@ -156,18 +204,19 @@ namespace bsdPanel
             if (this == &rhs)
                 return true;
             
-            if (name == rhs.getName() &&
+            if (*name == rhs.getName() &&
                 timeToLive == rhs.timeToLive &&
-                ipAddress == rhs.getAddress() &&
+                *ipAddress == rhs.getAddress() &&
                 distance == rhs.getDistance())
                 return true;
             else
                 return false;
         }
         
-        void MailExchange::output(std::ostream & os) const
+        std::ostream & MailExchange::output(std::ostream & os) const
         {
             os << name << ":" << timeToLive << ":" << ipAddress << ":" << distance;
+            return os;
         }
         
         unsigned int MailExchange::getDistance() const
