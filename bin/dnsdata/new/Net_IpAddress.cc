@@ -59,7 +59,7 @@ namespace bsdPanel
              * Its an unsigned short int, so we are limited to the ipv4 range
              */
             /*
-            for (int i = 0; i < address->size(); i++)
+            for (std::size_t i = 0; i < address->size(); i++)
             {
                 // Check to see if the int is between the right values
                 // if its true then we set check and move on to the 
@@ -161,11 +161,15 @@ namespace bsdPanel
         
         void IpAddress::output(std::ostream & os) const
         {
-            for (std::size_t i = 0; i < address->size() - 1; i++)
+            // loop each of the parts except the last one and append the delimiter
+            // only if we arent at the end
+            std::vector<unsigned short int>::iterator iter;
+            for (iter = address->begin(); iter != address->end(); iter++)
             {
-                os << address->at(i) << delim;
+                os << *iter;
+                if (iter != address->end())
+                    os << delim;
             }
-            os << address->at(address->size() - 1);
         }
         
         unsigned short int & IpAddress::operator[](std::size_t offset)
