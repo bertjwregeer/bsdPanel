@@ -61,7 +61,7 @@ namespace bsdPanel
                 //friend std::istream & operator>>(std::istream &, Record &);
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual bsdPanel::Net::DomainName & getName() const;
                 virtual unsigned long getTimeToLive() const;
                 bsdPanel::Net::DomainName *name;
