@@ -46,7 +46,7 @@ namespace bsdPanel
         {
             public:
                 Record();
-                //Record(const Record &);
+                Record(const Record &);
                 Record(const bsdPanel::Net::DomainName &);
                 Record(const bsdPanel::Net::DomainName &, const unsigned long);
                 Record(const std::string &);

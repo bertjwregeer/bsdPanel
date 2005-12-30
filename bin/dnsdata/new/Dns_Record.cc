@@ -25,7 +25,7 @@ namespace bsdPanel
         
         Record::Record(const Record & rhs)
         {
-            name = new bsdPanel::Net::DomainName(rhs.name);
+            name = new bsdPanel::Net::DomainName(rhs.getName());
             timeToLive = rhs.timeToLive;
         }
         
