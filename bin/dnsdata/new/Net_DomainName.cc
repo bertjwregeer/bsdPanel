@@ -77,6 +77,11 @@ namespace bsdPanel
                 return false;
         }
         
+        std::string & DomainName::asString() const
+        {
+            return *name;
+        }
+        
         std::ostream & DomainName::output(std::ostream & os) const
         {
             os << name;
