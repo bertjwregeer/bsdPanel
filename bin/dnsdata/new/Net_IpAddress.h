@@ -26,7 +26,7 @@ namespace bsdPanel
                 virtual std::string & asString() const;
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual void createAddress(const std::vector<unsigned short int> &);
                 virtual void createAddress(const std::vector<int> &);
                 virtual void createAddress(const std::string &);

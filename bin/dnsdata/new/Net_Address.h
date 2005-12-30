@@ -27,7 +27,7 @@ namespace bsdPanel
                 friend std::ostream & operator<<(std::ostream &, const Address &);
                 
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual char getDelim() const;
                 char delim;
         };

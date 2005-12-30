@@ -18,6 +18,7 @@ namespace bsdPanel
             public:
                 DomainName();
                 DomainName(const DomainName &);
+                DomainName(const std::string &);
                 virtual ~DomainName();
                 virtual bool isValid() const;
                 virtual DomainName & operator=(const DomainName &);
@@ -25,7 +26,7 @@ namespace bsdPanel
                 virtual std::string & asString() const;
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual std::string & getName() const;
                 void load_domain_codes();
                 std::string suffix() const;

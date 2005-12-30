@@ -46,14 +46,15 @@ namespace bsdPanel
         
         std::ostream & operator<<(std::ostream & os, const Address & addr)
         {
-            //os << addr.output(os);
-            os << "Address Output - This should be overloaded for the other types";
+            os << addr.output(os);
+            //os << "Address Output - This should be overloaded for the other types";
             return os;
         }
         
-        void Address::output(std::ostream & os) const
+        std::ostream & Address::output(std::ostream & os) const
         {
             os << "Address Output - This should be overloaded for the other types";
+            return os;
         }
         
         char Address::getDelim() const

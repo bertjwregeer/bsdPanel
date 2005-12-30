@@ -31,6 +31,11 @@ namespace bsdPanel
                 throw DomainNameException(DomainNameException::INVALID_ADDRESS);
         }
         
+        DomainName::DomainName(const std::string & dname) : Address()
+        {
+            name = new std::string(dname);
+        }
+        
         DomainName::~DomainName()
         {
             delete name;
@@ -72,9 +77,10 @@ namespace bsdPanel
                 return false;
         }
         
-        void DomainName::output(std::ostream & os) const
+        std::ostream & DomainName::output(std::ostream & os) const
         {
             os << name;
+            return os;
         }
         
         std::string & DomainName::getName() const

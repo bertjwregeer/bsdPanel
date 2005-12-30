@@ -159,7 +159,7 @@ namespace bsdPanel
             return *int_part;
         }
         
-        void IpAddress::output(std::ostream & os) const
+        std::ostream & IpAddress::output(std::ostream & os) const
         {
             // loop each of the parts except the last one and append the delimiter
             // only if we arent at the end
@@ -170,6 +170,8 @@ namespace bsdPanel
                 if (iter != address->end())
                     os << delim;
             }
+            
+            return os;
         }
         
         unsigned short int & IpAddress::operator[](std::size_t offset)
