@@ -29,7 +29,7 @@ namespace bsdPanel
         Alias::Alias(const Alias & rhs)
         {
             name = new bsdPanel::Net::DomainName(rhs.getName());
-            ttl = rhs.getTimeToLive();
+            timeToLive = rhs.getTimeToLive();
             ipAddress = new bsdPanel::Net::IpAddress(rhs.getAddress());
         }
         
@@ -49,9 +49,19 @@ namespace bsdPanel
         {
             // empty constructor, uses parent
         }
+        
+        Alias::Alias(const bsdPanel::Net::DomainName & dname, const std::string & ip_addr) : Host(dname, ip_addr)
+        {
+            // empty constructor, uses parent
+        }
                 
         Alias::Alias(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
                             const bsdPanel::Net::IpAddress & ip_addr) : Host(dname, ttl, ip_addr)
+        {
+            // empty constructor, uses parent
+        }
+        
+        Alias::Alias(const bsdPanel::Net::DomainName & dname, const unsigned long ttl, const std::string & ip_addr) : Host(dname, ip_addr)
         {
             // empty constructor, uses parent
         }
@@ -97,7 +107,7 @@ namespace bsdPanel
         
         bool Alias::isValid() const
         {
-            if (name.isValid() && ipAddress.isValid())
+            if (name->isValid() && ipAddress->isValid())
                 return true;
             else
                 return false;
@@ -107,6 +117,9 @@ namespace bsdPanel
         {
             if (this == &rhs)
                 return *this;
+            
+            if (name != NULL) delete name;
+            if (ipAddress != NULL) delete ipAddress;
             
             name = new bsdPanel::Net::DomainName(rhs.getName());
             timeToLive = rhs.getTimeToLive();
@@ -120,17 +133,18 @@ namespace bsdPanel
             if (this == &rhs)
                 return true;
             
-            if (name == rhs.getName() &&
+            if (*name == rhs.getName() &&
                 timeToLive == rhs.getTimeToLive() &&
-                ipAddress == rhs.getAddress())
+                *ipAddress == rhs.getAddress())
                 return true;
             else
                 return false;
         }
         
-        void Alias::output(std::ostream & os) const
+        std::ostream & Alias::output(std::ostream & os) const
         {
             os << name << ":" << timeToLive << ":" << ipAddress;
+            return os;
         }
     } // end namespace bsdPanel
 } // end namespace bsdPanel
