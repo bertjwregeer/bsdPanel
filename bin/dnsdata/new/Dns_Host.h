@@ -50,11 +50,13 @@ namespace bsdPanel
         {
             public:
                 Host();
-                //Host(const Host &);
+                Host(const Host &);
                 Host(const bsdPanel::Net::DomainName &);
                 Host(const bsdPanel::Net::DomainName &, const unsigned long);
                 Host(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &);
+                Host(const bsdPanel::Net::DomainName &, const std::string &);
                 Host(const bsdPanel::Net::DomainName &, const unsigned long, const bsdPanel::Net::IpAddress &);
+                Host(const bsdPanel::Net::DomainName &, const unsigned long, const std::string &);
                 Host(const std::string &);
                 Host(const std::string &, const unsigned long);
                 Host(const std::string &, const bsdPanel::Net::IpAddress &);
@@ -69,7 +71,7 @@ namespace bsdPanel
                 //friend std::istream & operator>>(std::istream &, Host &);
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual bsdPanel::Net::IpAddress & getAddress() const;
                 bsdPanel::Net::IpAddress *ipAddress;
         };

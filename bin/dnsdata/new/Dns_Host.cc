@@ -25,25 +25,44 @@ namespace bsdPanel
             ipAddress = new bsdPanel::Net::IpAddress();
         }
         
+        Host::Host(const Host & rhs)
+        {
+            name = new bsdPanel::Net::DomainName(rhs.getName());
+            timeToLive = rhs.timeToLive;
+            ipAddress = new bsdPanel::Net::IpAddress(rhs.getAddress());
+        }
+        
         Host::Host(const bsdPanel::Net::DomainName & dname) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress();
         }
         
+        Host::Host(const bsdPanel::Net::DomainName & dname, const unsigned long ttl)
+            : Record(dname, ttl)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress();
+        }
+        
+        Host::Host(const bsdPanel::Net::DomainName & dname,
+            const bsdPanel::Net::IpAddress & ipAddr) : Record(dname)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ipAddr);
+        }
+        
+        Host::Host(const bsdPanel::Net::DomainName & dname,
+            const std::string & ipAddr) : Record(dname)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ipAddr);
+        }
+        
         Host::Host(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
                     const bsdPanel::Net::IpAddress & ip_addr) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
         }
         
-        Host::Host(const bsdPanel::Net::DomainName & dname, 
-                    const bsdPanel::Net::IpAddress & ip_addr) : Record(dname)
-        {
-            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-        }
-        
         Host::Host(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
-                    const bsdPanel::Net::IpAddress & ip_addr) : Record(dname, ttl)
+                    const std::string & ip_addr) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
         }
@@ -88,9 +107,10 @@ namespace bsdPanel
         
         // look into possibility of calling parent output function in this and
         // then appending this classes data to that output.
-        void Host::output(std::ostream & os) const
+        std::ostream & Host::output(std::ostream & os) const
         {
             os << name << ":" << timeToLive << ":" << ipAddress;
+            return os;
         }
         
         bsdPanel::Net::IpAddress & Host::getAddress() const
