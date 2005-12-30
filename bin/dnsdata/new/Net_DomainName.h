@@ -2,6 +2,7 @@
 #define BSDPANEL_NET_DOMAINNAME_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <algorithm>
