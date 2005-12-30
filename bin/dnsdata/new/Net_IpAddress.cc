@@ -42,6 +42,11 @@ namespace bsdPanel
                 throw IpAddressException(IpAddressException::INVALID_ADDRESS);
         }
         
+        IpAddress::IpAddress(const std::string & ip_addr) : Address()
+        {
+            createAddress(ip_addr);
+        }
+        
         IpAddress::~IpAddress()
         {
             delete address;

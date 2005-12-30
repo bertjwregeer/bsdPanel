@@ -17,6 +17,7 @@ namespace bsdPanel
             public:
                 IpAddress();
                 IpAddress(const IpAddress &);
+                IpAddress(const std::string &);
                 virtual ~IpAddress();
                 virtual bool isValid() const;
                 virtual IpAddress & operator=(const IpAddress &);
