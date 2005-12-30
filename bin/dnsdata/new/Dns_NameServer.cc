@@ -26,7 +26,7 @@ namespace bsdPanel
             nameserver = new bsdPanel::Net::DomainName("a.ns.example.com");
         }
         
-        NameServer::NameServer(const NameServer & rhs)
+        NameServer::NameServer(const NameServer & rhs) 
         {
             name = new bsdPanel::Net::DomainName(rhs.getName());
             timeToLive = rhs.getTimeToLive();
@@ -34,55 +34,98 @@ namespace bsdPanel
             nameserver = new bsdPanel::Net::DomainName(rhs.getNSName());
         }
         
+        // bsdPanel::Net::DomainName constructors
         NameServer::NameServer(const bsdPanel::Net::DomainName & dname) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress();
-            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.getAddress().asString());
+            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.asString());
         }
         
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl)
-                    : Record(dname, ttl)
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress();
-            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.getAddress().asString());
+            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.asString());
         }
         
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname,
-                    const bsdPanel::Net::IpAddress & ip_addr) : Record(dname)
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const bsdPanel::Net::IpAddress & ip_addr) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.getAddress().asString());
+            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.asString());
         }
         
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
-                    const bsdPanel::Net::IpAddress & ip_addr) : Record(dname, ttl)
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const std::string & ip_addr) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.getAddress().asString());
+            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.asString());
         }
         
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname,
-                    const bsdPanel::Net::IpAddress & ip_addr, const bsdPanel::Net::DomainName & ns) 
-                    : Record(dname)
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl, const bsdPanel::Net::IpAddress & ip_addr) : Record(dname, ttl)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.asString());
+        }
+        
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl, const std::string & ip_addr) : Record(dname, ttl)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname.asString());
+        }
+        
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const bsdPanel::Net::IpAddress & ip_addr, const bsdPanel::Net::DomainName & ns) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
-                    const bsdPanel::Net::IpAddress & ip_addr, const bsdPanel::Net::DomainName & ns)
-                    : Record(dname, ttl)
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const bsdPanel::Net::IpAddress & ip_addr, const std::string & ns) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const std::string & ip_addr, const bsdPanel::Net::DomainName & ns) : Record(dname)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName(ns);
+        }
+        
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const std::string & ip_addr, const std::string & ns) : Record(dname) 
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName(ns);
+        }
+        
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl, const bsdPanel::Net::IpAddress & ip_addr, const bsdPanel::Net::DomainName & ns) : Record(dname, ttl)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName(ns);
+        }
+        
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl, const bsdPanel::Net::IpAddress & ip_addr, const std::string & ns) : Record(dname, ttl)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName(ns);
+        }
+        
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl, const std::string & ip_addr, const bsdPanel::Net::DomainName & ns) : Record(dname, ttl)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName(ns);
+        }
+        
+        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl, const std::string & ip_addr, const std::string & ns) : Record(dname, ttl)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName(ns);
+        }
+        
+        // String dname constructors
         NameServer::NameServer(const std::string & dname) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress();
             nameserver = new bsdPanel::Net::DomainName("a.ns." + dname);
         }
-        
+                
         NameServer::NameServer(const std::string & dname, const unsigned long ttl) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress();
@@ -95,117 +138,67 @@ namespace bsdPanel
             nameserver = new bsdPanel::Net::DomainName("a.ns." + dname);
         }
         
-        NameServer::NameServer(const std::string & dname, const unsigned long ttl, const std::string & ip_addr)
-                    : Record(dname, ttl)
+        NameServer::NameServer(const std::string & dname, const bsdPanel::Net::IpAddress & ip_addr) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName("a.ns." + dname);
         }
         
-        NameServer::NameServer(const std::string & dname, const std::string & ip_addr, const std::string & ns)
-                    : Record(dname)
+        NameServer::NameServer(const std::string & dname, const unsigned long ttl, const std::string & ip_addr) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-            nameserver = new bsdPanel::Net::DomainName(ns);
-        } // dname, ip_addr, nameserver
+            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname);
+        }
         
-        NameServer::NameServer(const std::string & dname, const unsigned long ttl, const std::string & ip_addr,
-                    const std::string & ns) : Record(dname, ttl)
+        NameServer::NameServer(const std::string & dname, const unsigned long ttl, const bsdPanel::Net::IpAddress & ip_addr) : Record(dname, ttl)
+        {
+            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
+            nameserver = new bsdPanel::Net::DomainName("a.ns." + dname);
+        }
+        
+        NameServer::NameServer(const std::string & dname, const std::string & ip_addr, const std::string & ns) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
-        // Constructors that cover the mixed parameters
-        NameServer::NameServer(const std::string & dname, const bsdPanel::Net::IpAddress & ip_addr,
-                    const bsdPanel::Net::DomainName & ns) : Record(dname)
+        NameServer::NameServer(const std::string & dname, const bsdPanel::Net::IpAddress & ip_addr, const std::string & ns) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
-        NameServer::NameServer(const std::string & dname, const unsigned long ttl,
-                    const bsdPanel::Net::IpAddress & ip_addr, const bsdPanel::Net::DomainName & ns) 
-                    : Record(dname, ttl)
+        NameServer::NameServer(const std::string & dname, const std::string & ip_addr, const bsdPanel::Net::DomainName & ns) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
-        
-        NameServer::NameServer(const std::string & dname, const std::string & ip_addr, 
-                    const bsdPanel::Net::DomainName & ns) : Record(dname)
+        NameServer::NameServer(const std::string & dname, const bsdPanel::Net::IpAddress & ip_addr, const bsdPanel::Net::DomainName & ns) : Record(dname)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
-        NameServer::NameServer(const std::string & dname, const unsigned long ttl, 
-                    const std::string & ip_addr, const bsdPanel::Net::DomainName & ns)
-                    : Record(dname, ttl)
+        NameServer::NameServer(const std::string & dname, const unsigned long ttl, const std::string & ip_addr, const std::string & ns) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
-        
-        NameServer::NameServer(const std::string & dname, const bsdPanel::Net::IpAddress & ip_addr,
-                    const std::string & ns) : Record(dname)
+        NameServer::NameServer(const std::string & dname, const unsigned long ttl, const bsdPanel::Net::IpAddress & ip_addr, const std::string & ns) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
-        NameServer::NameServer(const std::string & dname, const unsigned long ttl,
-                    const bsdPanel::Net::IpAddress & ip_addr, const std::string & ns)
-                    : Record(dname, ttl)
+        NameServer::NameServer(const std::string & dname, const unsigned long ttl, const std::string & ip_addr, const bsdPanel::Net::DomainName & ns) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
         }
         
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const std::string & ip_addr,
-                    const bsdPanel::Net::DomainName & ns) : Record(dname)
-        {
-            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-            nameserver = new bsdPanel::Net::DomainName(ns);
-        }
-        
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl, 
-                    const std::string & ip_addr, const bsdPanel::Net::DomainName & ns)
-                    : Record(dname, ttl)
-        {
-            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-            nameserver = new bsdPanel::Net::DomainName(ns);
-        }
-        
-        
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const std::string & ip_addr,
-                    const std::string & ns) : Record(dname)
-        {
-            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-            nameserver = new bsdPanel::Net::DomainName(ns);
-        }
-        
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
-                    const std::string & ip_addr, const std::string & ns) : Record(dname, ttl)
-        {
-            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-            nameserver = new bsdPanel::Net::DomainName(ns);
-        }
-        
-        
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname,
-                    const bsdPanel::Net::IpAddress & ip_addr, const std::string & ns)
-                    : Record(dname)
-        {
-            ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
-            nameserver = new bsdPanel::Net::DomainName(ns);
-        }
-        
-        NameServer::NameServer(const bsdPanel::Net::DomainName & dname, const unsigned long ttl,
-                    const bsdPanel::Net::IpAddress & ip_addr, const std::string & ns)
-                    : Record(dname, ttl)
+        NameServer::NameServer(const std::string & dname, const unsigned long ttl, const bsdPanel::Net::IpAddress & ip_addr, const bsdPanel::Net::DomainName & ns) : Record(dname, ttl)
         {
             ipAddress = new bsdPanel::Net::IpAddress(ip_addr);
             nameserver = new bsdPanel::Net::DomainName(ns);
@@ -219,9 +212,9 @@ namespace bsdPanel
         
         bool NameServer::isValid() const
         {
-            if (name.isValid() &&
-                ipAddress.isValid() &&
-                nameserver.isValid())
+            if (name->isValid() &&
+                ipAddress->isValid() &&
+                nameserver->isValid())
                 return true;
             else
                 return false;
@@ -232,28 +225,34 @@ namespace bsdPanel
             if (this == &rhs)
                 return *this;
             
-            name = rhs.getName();
+            // need to check for existing values and cleanup before assignment
+            if (name != NULL) delete name;
+            if (ipAddress != NULL) delete ipAddress;
+            if (nameserver != NULL) delete nameserver;
+            
+            name = new bsdPanel::Net::DomainName(rhs.getName());
             timeToLive = rhs.getTimeToLive();
-            ipAddress = rhs.getAddress();
-            nameserver = rhs.getNSName();
+            ipAddress = new bsdPanel::Net::IpAddress(rhs.getAddress());
+            nameserver = new bsdPanel::Net::DomainName(rhs.getNSName());
             
             return *this;
         }
         
         bool NameServer::operator==(const NameServer & rhs) const
         {
-            if (name == rhs.getName() &&
+            if (*name == rhs.getName() &&
                 timeToLive == rhs.getTimeToLive() &&
-                ipAddress == rhs.getAddress() &&
-                nameserver == rhs.getNSName())
+                *ipAddress == rhs.getAddress() &&
+                *nameserver == rhs.getNSName())
                 return true;
             else
                 return false;
         }
         
-        void NameServer::output(std::ostream & os) const
+        std::ostream & NameServer::output(std::ostream & os) const
         {
             os << name << ":" << timeToLive << ":" << ipAddress << ":" << nameserver;
+            return os;
         }
         
         bsdPanel::Net::IpAddress & NameServer::getAddress() const

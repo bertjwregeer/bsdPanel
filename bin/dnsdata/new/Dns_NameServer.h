@@ -51,30 +51,44 @@ namespace bsdPanel
             public:
                 NameServer();
                 NameServer(const NameServer &);
+                
                 NameServer(const bsdPanel::Net::DomainName &);
                 NameServer(const bsdPanel::Net::DomainName &, const unsigned long);
-                NameServer(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &);
-                NameServer(const bsdPanel::Net::DomainName &, const unsigned long,
-                            const bsdPanel::Net::IpAddress &);
-                NameServer(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &,
-                            const bsdPanel::Net::DomainName &);
-                NameServer(const bsdPanel::Net::DomainName &, const unsigned long,
-                            const bsdPanel::Net::IpAddress &, const bsdPanel::Net::DomainName &);
-                NameServer(const std::string &);
-                NameServer(const std::string &, const unsigned long);
-                NameServer(const std::string &, const std::string &);   // dname, ip_addr
-                NameServer(const std::string &, const unsigned long, const std::string &);
-                NameServer(const std::string &, const std::string &, const std::string &); // dname, ip_addr, nameserver
-                NameServer(const std::string &, const unsigned long, const std::string &,
-                            const std::string &);
                 
-                // Constructors that cover the mixed parameters
-                NameServer(const std::string &, const bsdPanel::Net::IpAddress &, const bsdPanel::Net::DomainName &);
-                NameServer(const std::string &, const std::string &, const bsdPanel::Net::DomainName &);
-                NameServer(const std::string &, const bsdPanel::Net::IpAddress &, const std::string &);
+                NameServer(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &);
+                NameServer(const bsdPanel::Net::DomainName &, const std::string &);
+                
+                NameServer(const bsdPanel::Net::DomainName &, const unsigned long, const bsdPanel::Net::IpAddress &);
+                NameServer(const bsdPanel::Net::DomainName &, const unsigned long, const std::string &);
+                
+                NameServer(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &, const bsdPanel::Net::DomainName &);
+                NameServer(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &, const std::string &);
                 NameServer(const bsdPanel::Net::DomainName &, const std::string &, const bsdPanel::Net::DomainName &);
                 NameServer(const bsdPanel::Net::DomainName &, const std::string &, const std::string &);
-                NameServer(const bsdPanel::Net::DomainName &, const bsdPanel::Net::IpAddress &, const std::string &);
+                
+                NameServer(const bsdPanel::Net::DomainName &, const unsigned long, const bsdPanel::Net::IpAddress &, const bsdPanel::Net::DomainName &);
+                NameServer(const bsdPanel::Net::DomainName &, const unsigned long, const bsdPanel::Net::IpAddress &, const std::string &);
+                NameServer(const bsdPanel::Net::DomainName &, const unsigned long, const std::string &, const bsdPanel::Net::DomainName &);
+                NameServer(const bsdPanel::Net::DomainName &, const unsigned long, const std::string &, const std::string &);
+                
+                NameServer(const std::string &);
+                NameServer(const std::string &, const unsigned long);
+                
+                NameServer(const std::string &, const std::string &);
+                NameServer(const std::string &, const bsdPanel::Net::IpAddress &);
+                
+                NameServer(const std::string &, const unsigned long, const std::string &);
+                NameServer(const std::string &, const unsigned long, const bsdPanel::Net::IpAddress &);
+                
+                NameServer(const std::string &, const std::string &, const std::string &);
+                NameServer(const std::string &, const bsdPanel::Net::IpAddress &, const std::string &);
+                NameServer(const std::string &, const std::string &, const bsdPanel::Net::DomainName &);
+                NameServer(const std::string &, const bsdPanel::Net::IpAddress &, const bsdPanel::Net::DomainName &);
+                
+                NameServer(const std::string &, const unsigned long, const std::string &, const std::string &);
+                NameServer(const std::string &, const unsigned long, const bsdPanel::Net::IpAddress &, const std::string &);
+                NameServer(const std::string &, const unsigned long, const std::string &, const bsdPanel::Net::DomainName &);
+                NameServer(const std::string &, const unsigned long, const bsdPanel::Net::IpAddress &, const bsdPanel::Net::DomainName &);
                 
                 virtual ~NameServer();
                 virtual bool isValid() const;
@@ -84,7 +98,7 @@ namespace bsdPanel
                 //friend std::istream & operator>>(std::istream &, NameServer &);
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual bsdPanel::Net::IpAddress & getAddress() const;
                 virtual bsdPanel::Net::DomainName & getNSName() const;
                 bsdPanel::Net::IpAddress *ipAddress;
