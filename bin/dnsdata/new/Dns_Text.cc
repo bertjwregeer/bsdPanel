@@ -83,7 +83,7 @@ namespace bsdPanel
         
         bool Text::isValid() const
         {
-            if (name.isValid())
+            if (name->isValid())
                 return true;
             else
                 return false;
@@ -103,17 +103,18 @@ namespace bsdPanel
         
         bool Text::operator==(const Text & rhs) const
         {
-            if (name == rhs.getName() &&
+            if (*name == rhs.getName() &&
                 timeToLive == rhs.getTimeToLive() &&
-                content == rhs.getContent())
+                *content == rhs.getContent())
                 return true;
             else
                 return false;
         }
         
-        void Text::output(std::ostream & os)
+        std::ostream & Text::output(std::ostream & os) const
         {
             os << name << ":" << timeToLive << ":" << content;
+            return os;
         }
         
         std::string & Text::getContent() const

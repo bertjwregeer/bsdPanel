@@ -68,7 +68,7 @@ namespace bsdPanel
                 //friend std::istream & operator>>(std::istream &, Text &);
             
             protected:
-                virtual void output(std::ostream &) const;
+                virtual std::ostream & output(std::ostream &) const;
                 virtual std::string & getContent() const;
                 std::string *content;
         };
