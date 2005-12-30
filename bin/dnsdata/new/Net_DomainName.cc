@@ -47,6 +47,40 @@ namespace bsdPanel
             return check;
         }
         
+        DomainName & DomainName::operator=(const DomainName & rhs)
+        {
+            if (this == &rhs)
+                return *this;
+            
+            delim = rhs.delim;
+            
+            if (name != NULL) {
+                delete name;
+            }
+            
+            name = new std::string(rhs.getName());
+            return *this;
+        }
+        
+        bool DomainName::operator==(const DomainName & rhs) 
+        {
+            if ((this == &rhs) ||
+                (delim == rhs.delim && name == rhs.name))
+                return true;
+            else
+                return false;
+        }
+        
+        void DomainName::output(std::ostream & os) const
+        {
+            os << name;
+        }
+        
+        std::string & DomainName::getName() const
+        {
+            return *name;
+        }
+        
         std::string DomainName::suffix() const
         {
             int pos = name->rfind(delim, name->length());
