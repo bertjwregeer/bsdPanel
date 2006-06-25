@@ -1,0 +1,106 @@
+bsdPanel Protocol:
+
+There are two types of users, those that are actual system users, and virtual users that are part of a user
+ account, namely a sub-user. Resellers will only create system users with the three letter prefix they got,
+ followed by an underscore and then the user of the reseller's username.
+
+Actual system user:
+
+xistence
+
+Reseller (with username doe, will have prefix doe_)
+
+doe_example
+
+sub-user (for domain example.com)
+
+example@example.com (Always has a domain on the end, so there can be multiple example@<domain>'s off course)
+
+
+
+-------------------------------------------------------------------------------------------------------------
+Server Side Protocol (What the server may return and how)
+
+Data is good:
++
+
+After the + sign, there can be a line explaining what happened, or what is good. Or if only one line
+is to be returned, that is the way to do it. (I will get to the 4 digit codes). // mean comment, and are
+ there only for humans debugging the protocol and can be turned off, for more speed.
+        + 0001 // User added to system
+
+Data is good, multiple lines coming, data will be terminated by a <CRLF>.<CRLF>:
+++
+
+Like the + sign above, this accepts data on the same line, however not in the form of a four digit code
+but rather the sub-system that is returning the information, followed by a space and the amount of lines
+that are going to be returned. For example the mail system might return what users are under a domain.
+        ++ 01 2
+        example
+        techsupport
+        .
+
+Data is bad, or an error occured:
+-
+
+The - sign can be followed by a four digit code specifying what error happened. For example if a login
+failed, then it will return:
+        - 0099 // Login failed
+
+Clients generally do not have to worry about why it failed, but rather note that it failed, and warn the
+user of the error with the last issued command.
+
+Each subsystem has it's own identifying code, with room to grow:
+
+00      core
+01      mail
+02      ftp
+03      httpd
+04      dns
+05      database
+
+This allows plenty of room for other sub-systems that can be integrated, and or modules created for.
+
+The status codes are created as follows:
+
+00 -> 40 Good codes
+99 -> 41 Bad codes
+
+I am assuming there will be more bad codes than good codes. Right now, all good codes get created down at
+the bottom, and move up. So for example:
+
+0000 = core system, valid user login
+0099 = core system, invalid user login
+0098 = core system, invalid command
+
+These will have to be clearly defined, it is up to each sub-system to make sure they return the comment to
+be sent back to the client when the environment variable PANELDEBUG is set to 1.
+
+-------------------------------------------------------------------------------------------------------------
+Client to Server protocol
+
+This will explain how the client can send commands to the server, and how they will be parsed.
+
+The first thing the client has to send is the login command, which has a simple syntax, it is the only
+command besides logout, that does not have to be preceded by what sub-system:
+
+login <username> <password>
+
+        login xistence mypassword
+        login doe_example examplepassword
+        login blah@example.com password
+
+The logout command, simple, quick and easy, it has an alias named quit. They both do the same thing:
+
+logout
+quit
+
+All other commands have to be preceded by the sub-system id, for example to create a new system user
+(hypothetical, see document in folder docs named SUBSYSTEMS)
+        (sub-system id)        (command)        (arguments)
+        00                     adduser          xistence        password        nologin
+
+To see what a sub-system has to offer, the function they are required to offer is named help. Help will
+limit it's output to what the current logged in user is allowed to do.
+
+        00 help
