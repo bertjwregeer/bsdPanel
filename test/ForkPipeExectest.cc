@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <Exec/Exec.h>
-#include <bsdPanelInc.h>
+#include <0x58-unix/Exec.h>
 
 int main() {
 
@@ -11,7 +10,7 @@ int main() {
         blah.push_back(std::string("/usr/bin/find"));
         blah.push_back(std::string("."));
         
-        bsdPanel::Exec *MyExec = new bsdPanel::Exec(blah);
+        x58unix::Exec *MyExec = new x58unix::Exec(blah);
         MyExec->doExec();
                 
         std::string mystring;

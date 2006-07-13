@@ -1,13 +1,15 @@
-ForkPipeExectest: ForkPipeExectest.cc includes
-	$(CXX) -I../bin/includes/ ../bin/includes/Fork/Fork.o ../bin/includes/Pipe/Pipe.o ../bin/includes/Exec/Exec.o ForkPipeExectest.cc -o ForkPipeExectest
+CXXFLAGS=-I../bin/includes/
 
-Parsertest: Parsertest.cc includes
-	$(CXX) -ggdb -g -I../bin/includes/ ../bin/includes/Parser/Parser.o Parsertest.cc -o Parsertest
+ForkPipeExectest: ForkPipeExectest.o 0x58-unix
+	$(CXX) -I../bin/includes/ ForkPipeExectest.cc -L../bin/includes/0x58-unix/ -lx58unix -o ForkPipeExectest
 
-includes::
-	cd ../bin/includes/; $(MAKE)
+0x58-unix::
+	$(MAKE) -C ../bin/includes/0x58-unix/
+
+.cc.o:
+	$(CXX) -I../bin/includes/ -c $<
 
 clean:
 	rm -rf ForkPipeExectest
-	rm -rf Parsertest
-	rm -rf *.core
+	rm -rf *.o
+	cd ../bin/includes/0x58-unix/ && $(MAKE) clean
