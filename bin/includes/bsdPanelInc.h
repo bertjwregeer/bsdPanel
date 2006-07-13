@@ -1,5 +1,5 @@
 /*
- * Copyright 2005 X-Istence.com. All rights  reserved.
+ * Copyright 2006 Bert JW Regeer. All rights  reserved.
  *
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,10 +25,8 @@
  *
  * The views and conclusions contained in the software and  documentation are
  * those of the authors and should not be  interpreted as representing official
- * policies, either expressed  or implied, of X-Istence.com or the bsdPanel
- * project.
+ * policies, either expressed  or implied, of bsdPanel project.
  *
- * $Id$
  */
 
 #ifndef BSDPANEL_INC
@@ -57,7 +55,7 @@ namespace bsdPanel {
 
 /*
 int main() {
-        try { // Random stuff here } catch ( exit_exception_detail::exit_t const& e ) { return e.code; } catch (...) { return EXIT_FAILURE; }
+        try { // Random stuff here } catch ( bsdPanel::exit_t const& e ) { return e.code; } catch (...) { return EXIT_FAILURE; }
 }      
 */
 
