@@ -7,7 +7,7 @@ There are the following sub-systems that will be provided standard with bsdPanel
 02      ftp
 03      httpd
 04      dns
-05      database
+05      pgsql
 
 The way to communicate between the main daemon and the sub-system will be defined in this document:
 
