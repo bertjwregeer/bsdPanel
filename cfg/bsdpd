@@ -4,7 +4,7 @@
 
 -- {
         workingdir: /usr/local/bsdpanel/;       # This is the directory where bsdPanel's stuff resides. (bin, cfg, and others)
-        debug: 0;                               # Wether we should print debugging messages or not
+        debug: 0;                               # Whether we should print debugging messages or not
 }
 
 # Format:
@@ -12,7 +12,7 @@
 # <sub-system name> {
 #       id: <number>;                           # Any number that is not taken by the core sub-systems (06 - 99)
 #       program: bin/something;                 # Full path, or take workingdir/<program>. So /usr/local/bsdpanel/bin/something in this example.
-#       arguments: -user xistence;              # Pass an arbitrary amount of argumants to the program to be executed
+#       arguments: -user xistence;              # Pass an arbitrary amount of arguments to the program to be executed
 #       env: SPECIALSAUCE=yes,MAYO=no;          # Pass environment variables to the executing program.
 # }
 
@@ -21,7 +21,7 @@
 
 core {  
         id: 00; 
-        program: bin/core;
+        program: bin/bsdpcore;
 }
 
 mail {
