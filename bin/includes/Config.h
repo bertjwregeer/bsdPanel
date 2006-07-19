@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2006 Bert JW Regeer. All rights  reserved.
  *
  *
@@ -27,37 +27,88 @@
  * those of the authors and should not be  interpreted as representing official
  * policies, either expressed  or implied, of bsdPanel project.
  *
- */
+**/
 
 #ifndef BSDPANEL_CONFIG_H
 #define BSDPANEL_CONFIG_H
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <iostream>
+#include <sstream>
 #include <fstream>
+#include <string>
+#include <stdexcept>
 
 namespace bsdPanel {
-        class Config
-        {
+        class Config {
         public:
                 class ConfigCont
                 {
                 public:
-                        virtual ConfigCont ();
-                        virtual ~ConfigCont ();
-                        virtual bool add (std::string & const name, std::string & const param, std::string & const value);
+                        ConfigCont ();
+                        virtual ~ConfigCont () = 0;
+                        virtual bool add (std::string const & name, std::string const & param, std::string const & value) = 0;
+                        virtual bool done () = 0;
                 };
                 
-                Config (std::istream & input, Config::ConfigCont & cont) : _input(input), _cont(cont);
-                ~Config ();
-                // We return a ConfigCont which in reality is some class derived from this. Which means you have to dynamic_cast it
-                Config::ConfigCont getConfig();
+                Config (std::string const & path, Config::ConfigCont * cont);
+                const bsdPanel::Config::ConfigCont* getConfig();
+                bool runParse();
 
         private:
-                std::istream _input;
-                Config::ConfigCont _cont;
-                bool parseDone = false;
+                inline bool _addContainer(std::string const & name, std::string const & param, std::string const & value);
+                inline const char _checkCharacter(char const & c);
+                enum State { Searching, Program, ClosingBrace, Parameter, Value };
                 
-                bool runParse();
+                State _state;
+                std::ifstream _input;
+                Config::ConfigCont * _cont;
+                bool _parseDone;
+                unsigned int _line;
+                
+                Config () {}
+                Config (Config&);
+                Config& operator = (Config&);
         };
+        
+        namespace ConfigExcept {
+                class NoExist : public std::runtime_error {
+                        public:
+                                NoExist() 
+                                        : std::runtime_error("Config file does not exist") { };
+                };
+                
+                class WrongMode : public std::runtime_error {
+                        public:
+                                WrongMode()
+                                        : std::runtime_error("Config file is not chmod 400") { };
+                };
+                
+                class OpenFailure : public std::runtime_error {
+                        public:
+                                OpenFailure()
+                                        : std::runtime_error("Failure to open config file") {};
+                };
+                
+                class SyntaxError : public std::exception {
+                        std::string _msg;
+                        
+                        public:
+                                SyntaxError(const int line, const std::string&  _arg) {
+                                        std::stringstream iss;
+                                        iss << line;
+                                        _msg = "Syntax Error (" + iss.str() + "): " + _arg;
+                                }
+                                
+                                ~SyntaxError() throw() {};
+                                
+                                const char* what() const throw() {
+                                        return _msg.c_str();
+                                }
+                };
+                
+        }
+
 }
 
 #endif
