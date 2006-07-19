@@ -1,5 +1,5 @@
 #!/bin/sh
-##
+###
  # Copyright 2006 Bert JW Regeer. All rights  reserved.
  #
  #
@@ -28,15 +28,15 @@
  # those of the authors and should not be  interpreted as representing official
  # policies, either expressed  or implied, of bsdPanel project.
  #
- ##
+###
 
-##
+###
  # This script is used to create IMAPdir folders for a vpopmail structure, this is needed
  # when the IMAPD is binc-imap and it is set to IMAPdir support. It will check if all the
  # right directories have been created for both spamassassin and IMAPdir, as well as the
  # that the symlink from INBOX -> ../Maildir is in order, if not it will fix the error.
  # This script can be run from cron, as it does nothing if everything is in order.
- ## 
+### 
 
 OLDPWD=$PWD
 # Find all the domains that exist in vpopmail. Hardcoded path, symlink the domains dir if you move it
