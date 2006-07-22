@@ -1,0 +1,8 @@
+Two sections
+
+Web Interface module
+-------------------------------
+PHP based, reads an XML file storing the domain information
+Interface allows for adding to and editting of XML content
+Once additions or modifications are complete then the backend program runs
+the backend program takes the XML file and transforms it either in code or XSL into the dns format required, be it djbDNS data file format, or BIND Zone file format

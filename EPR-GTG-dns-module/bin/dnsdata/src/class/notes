@@ -1,0 +1,7 @@
+domain name program
+
+operator overloading
+=
+==
+
+inherited methods need to be virtual for them to be passed down the inheritance tree when used in general arrays such as Record array[50]; and so on.

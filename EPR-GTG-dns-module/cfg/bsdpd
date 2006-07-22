@@ -1,0 +1,50 @@
+# bsdPanel sample config file
+
+# This first one is special, in that it is used by the bsdPanel daemon
+
+-- {
+        workingdir: /usr/local/bsdpanel/;       # This is the directory where bsdPanel's stuff resides. (bin, cfg, and others)
+        debug: 0;                               # Whether we should print debugging messages or not
+}
+
+# Format:
+
+# <sub-system name> {
+#       id: <number>;                           # Any number that is not taken by the core sub-systems (06 - 99)
+#       program: bin/something;                 # Full path, or take workingdir/<program>. So /usr/local/bsdpanel/bin/something in this example.
+#       arguments: -user xistence;              # Pass an arbitrary amount of arguments to the program to be executed
+#       env: SPECIALSAUCE=yes,MAYO=no;          # Pass environment variables to the executing program.
+# }
+
+# It is important to remember to close the brackets, and to add a semi-colon to the end of each of the different variables.
+# to use a semi-colon in a variable, precede it with a backslash (\).
+
+core {  
+        id: 00; 
+        program: bin/bsdpcore;
+}
+
+mail {
+        id: 01;
+        program: bin/mail-qmail;
+}
+
+ftp {
+        id: 02;
+        program: bin/ftp-pureftpd;
+}
+
+httpd {
+        id: 03;
+        program: bin/httpd-apache;
+}
+
+dns {
+        id: 04;
+        program: bin/dns-tinydns;
+}
+
+pgsql {
+        id: 05;
+        program: bin/database-pgsql;
+}

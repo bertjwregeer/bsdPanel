@@ -1,0 +1,134 @@
+bsdPanel Sub-Systems:
+
+There are the following sub-systems that will be provided standard with bsdPanel.
+
+00      core
+01      mail
+02      ftp
+03      httpd
+04      dns
+05      pgsql
+
+The way to communicate between the main daemon and the sub-system will be defined in this document:
+
+When a client sends a command, it does so in the following form:
+        (sub-system id)        (command)        (arguments)
+        00                     adduser          xistence        password        nologin
+
+The main daemon will parse that command, and will pass on everything but the first argument. The sub-system
+will thus get the following:
+
+        adduser xistence password nologin
+
+It is then up to the sub-system to parse this, and do whatever it needs to do, however we need some way to
+check permissions to make sure that the current logged in user has the permission to do whatever they are
+trying to do.
+
+Internal communication is always preceded by a period. Then the sub-system id, and the function they are
+trying to access as a number. (Each function will have it's own number, more on that later)
+        . 00 1 // Function number 1, for sub-system 00 is core->adduser()
+
+The main daemon will parse this and come back with a simple answer either a 1 or a 0. 1 is true, 0 is false,
+the answer will be a dot and a plus sign, a space and then an answer
+
+        .+ 1
+
+However, in certain cases it will be more beneficiary to get the permissions a user has for the entire
+sub-system rather than getting it piece by piece each time a function is called (thus caching it), this can
+also be done using the number 0 as the function:
+
+        . 00 0
+
+What one will get back is an integer number that contains all of the above 1's and 0's bitshifted by the
+function number.
+
+So for example, if you have two functions, and each one is allowed for the current user, you will get back
+the number 3.
+
+        .+ 3
+
+1 + 2 = 3. (1 << 1) + (1 << 2)
+
+  0001
++ 0010
+  ----
+  0011
+
+Since we are going for a way to have all the sub-systems replaceable, it means that for the sub-systems
+that are provided with bsdPanel, the functions will have to have their numbers set ahead of time. Any other
+system will have to initialize with bsdPanel, and the auth system, add what permissions are standard, and
+which ones have to be given, more on this will be provided later on.
+
+Sub-System Standard functions:
+
+Name    Function        Paramaters
+
+00 core
+
+        01 adduser
+                --      username
+                --      password
+                --      quota (If quota support is turned on, otherwise dummy paramater)
+                --      homedir
+                --      permissions (base 64 encoded, format: <subsystem>:<perm>,<subsystem>:<perm>)
+        02 deluser
+                --      username
+        
+01 mail
+        01 adddomain
+                --      domain
+                --      password (for postmaster, not required for all systems. Make dummy if not needed)
+        02 deldomain
+                --      domain
+        03 adduser
+                --      domain
+                --      username
+                --      password
+                --      quota (Most systems broken. Do disk based quota's if possible.)
+        04 deluser
+                --      domain
+                --      username (Can also be an alias)
+        05 addalias
+                --      domain
+                --      aliasfrom (support@example.com)
+                --      aliasto (realsupport@example.net)
+        06 delalias
+                --      domain
+                --      aliasfrom (Does the same as deluser, should not be substituted for each other)
+        07 addmailling
+                --      domain
+                --      maillinglistname
+        08 delmailling
+                --      domain
+                --      maillinglistname
+        09 addautoreply
+                --      domain
+                --      autoreply (faq@example.net)
+                --      forwardto (support@example.net, this is where all messages will be sent that got a reply)
+                --      message (base 64 encoded)
+        10 delautoreply
+                --      domain
+                --      autoreply
+        11 showdomains
+        12 showusers
+                --      domain
+        13 showmailling
+                --      domain
+        14 showautoreply
+                --      domain
+        15 changepass
+                --      domain
+                --      username
+        16 moduser
+                --      domain
+                --      username
+                --      what (<change>:<string/number>)
+                        # This was added in for the likes of vpopmail, or other systems where it is
+                        # possible to specify a certain flag to cause certain things to happen. For example
+                        # limiting SMTP auth, or IMAP access, or disabling spamassassin.
+        17 getmod       
+                --      domain
+                --      username
+                        # Get information regarding what modifications can be made. This is entirely up
+                        # to the system in use. Applications should make sure to check if what they want
+                        # is available before using it.
