@@ -1,7 +1,6 @@
 /**
  * Copyright 2006 Bert JW Regeer. All rights  reserved.
  *
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -134,7 +133,7 @@ inline const char bsdPanel::Config::_checkCharacter(char const & c) {
 
 inline bool bsdPanel::Config::_addContainer(std::string const & name, std::string const & param, std::string const & value) {
         if (name.empty() || param.empty() || value.empty()) {
-                throw bsdPanel::ConfigExcept::SyntaxError(_line, "Config: Absolute failure!");
+                throw bsdPanel::ConfigExcept::SyntaxError(-1, "Config: Absolute failure!");
         }
         
         return _cont->add(name, param, value);

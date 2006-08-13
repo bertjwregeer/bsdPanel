@@ -1,7 +1,6 @@
 /**
  * Copyright 2006 Bert JW Regeer. All rights  reserved.
  *
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -38,6 +37,8 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+
+// TODO: Check if there are no memory leaks that can occur, preferably using a tool like Valgrind.
 
 namespace bsdPanel {
         class Config {
