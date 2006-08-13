@@ -2,7 +2,6 @@
 ###
  # Copyright 2006 Bert JW Regeer. All rights  reserved.
  #
- #
  # Redistribution and use in source and binary forms, with or without
  # modification, are permitted provided that the following conditions
  # are met:
@@ -39,6 +38,7 @@
 ### 
 
 OLDPWD=$PWD
+# FIXME: Make the location of the domain dirs a variable that exists somewhere in this file, as well whether want to enable the spamassassin stuff and whatnot
 # Find all the domains that exist in vpopmail. Hardcoded path, symlink the domains dir if you move it
 for i in `find /usr/local/vpopmail/domains/ -type d -maxdepth 1 | grep -v '^.$' | grep -v 'domains/$'`; do
 	cd $i
