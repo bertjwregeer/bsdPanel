@@ -29,6 +29,9 @@
  #
 ###
 
+DOMAINDIR=/usr/local/vpopmail/domains/
+ENABLESA=yes
+
 ###
  # This script is used to create IMAPdir folders for a vpopmail structure, this is needed
  # when the IMAPD is binc-imap and it is set to IMAPdir support. It will check if all the
@@ -38,9 +41,9 @@
 ### 
 
 OLDPWD=$PWD
-# FIXME: Make the location of the domain dirs a variable that exists somewhere in this file, as well whether want to enable the spamassassin stuff and whatnot
+
 # Find all the domains that exist in vpopmail. Hardcoded path, symlink the domains dir if you move it
-for i in `find /usr/local/vpopmail/domains/ -type d -maxdepth 1 | grep -v '^.$' | grep -v 'domains/$'`; do
+for i in `find $DOMAINDIR -type d -maxdepth 1 | grep -v '^.$' | grep -v 'domains/$'`; do
 	cd $i
 	echo "Domain: $i"
 	# Find all the users in that domain
@@ -67,11 +70,13 @@ for i in `find /usr/local/vpopmail/domains/ -type d -maxdepth 1 | grep -v '^.$' 
 		fi
 		cd ..
 		
-		# Create spamassassin directory
-		if [ ! -d .spamassassin ]; then
-			mkdir .spamassassin
-			chmod 700 .spamassassin
-			chown vpopmail:vchkpw .spamassassin
+		if [ "yes" = "$ENABLESA"]; then
+			# Create spamassassin directory
+			if [ ! -d .spamassassin ]; then
+				mkdir .spamassassin
+				chmod 700 .spamassassin
+				chown vpopmail:vchkpw .spamassassin
+			fi
 		fi
 		cd $i
 	done
