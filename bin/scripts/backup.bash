@@ -75,11 +75,16 @@ fi
 
 /usr/local/bin/rsync -av --relative --delete /usr/home/ $BACKUPDIR --exclude-from=/tmp/exclude.$$
 
-if [ $? -ne 0 ]; then
-	logger -s -p user.err -t backup "rsync failed. Do not trust backup ($BACKUPDIR)"
-	/sbin/umount /backup
-	exit 1
+EXITCODE=$?
+
+if [ $EXITCODE -ne 0 ]; then
+	if [ $EXITCODE -ne 24 ]; then
+		logger -s -p user.err -t backup "rsync failed. Do not trust backup ($BACKUPDIR)"
+		/sbin/umount /backup
+		exit 1
+	fi
 fi
+
 
 echo "Backup complete! Deleting oldest backup (14 days ago)"
 
